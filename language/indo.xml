@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <lang slug="welcome">
+      <text>Selamat Datang</text>
+    </lang>
+    <lang slug="to">
+        <text>di</text>
+    </lang>
+    <lang slug="company-name">
+        <text>Dodolo.id</text>
+    </lang>
+    <lang slug="welcome-text">
+        <text>Portal yang membantu produsen menjual produk / menemukan resellernya secara lebih mudah dan efektif
+            Marketplace B to B, yakni Produsen ke Reseller dan sebaliknya
+            Semua transaksi antar Produsen ke Reseller melewati, diawasi dan dijaga oleh Dodolo
+            Membina dan melatih para reseller untuk menjualkan produk produsen secara maksimal
+            Membangun jaringan reseller seluruh indonesia
+        </text>
+    </lang>
+</data>
