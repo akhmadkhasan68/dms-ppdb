@@ -1,1 +1,1 @@
-minipanel-moderator
+Penerimaan Peserta Didik Baru
