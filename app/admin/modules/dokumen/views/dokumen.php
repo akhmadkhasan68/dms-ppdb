@@ -19,7 +19,7 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Dokumen</h5>
-                        <table class="mb-0 table table-striped">
+                        <table class="mb-0 table table-striped" id="table_dokumen" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>

@@ -1,4 +1,9 @@
 <script>
+    $(document).ready(function() {
+        $('#table_approval').DataTable();
+    });
+</script>
+<script>
     function terima() {
         Swal.fire({
             title: 'Terima Dokumen Ini !',

@@ -1,4 +1,9 @@
 <script>
+    $(document).ready(function() {
+        $('#table_share').DataTable();
+    });
+</script>
+<script>
     function download() {
         Swal.fire({
             title: 'Unduh Dokumen Ini !',

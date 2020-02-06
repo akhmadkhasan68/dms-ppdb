@@ -7,7 +7,7 @@
                         <i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
                         </i>
                     </div>
-                    <div>Dokumen Yang Di bagi
+                    <div>Dokumen Yang Di Bagikan
                         <div class="page-title-subheading">Semua data yang telah dibagikan kepada anda akan terdaftar di halaman ini
                         </div>
                     </div>
@@ -19,7 +19,7 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Dokumen</h5>
-                        <table class="mb-0 table table-striped">
+                        <table class="mb-0 table table-striped" id="table_share" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>

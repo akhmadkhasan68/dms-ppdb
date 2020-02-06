@@ -7,7 +7,7 @@
                         <i class="pe-7s-drawer icon-gradient bg-happy-itmeo">
                         </i>
                     </div>
-                    <div>Dokumen yang harus di setujui
+                    <div>Dokumen Yang Harus Di Setujui
                         <div class="page-title-subheading">Semua data yang perluh di beri akses "ijinkan" akan terdaftar di halaman ini
                         </div>
                     </div>
@@ -19,7 +19,7 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Approval Dokumen</h5>
-                        <table class="mb-0 table table-striped">
+                        <table class="mb-0 table table-striped" id="table_approval" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
