@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class M_approval extends MY_Model
+class M_pengumuman extends MY_Model
 {
   public function __construct()
   {

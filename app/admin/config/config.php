@@ -40,7 +40,7 @@ if ($_SERVER['HTTP_HOST'] == 'localhost') {
   //nyalakan config base url di bawah kalau butuh, sesuai kebutuhan d lokal
   //'resellerv2' ganti sesuai folder d lokalmu
   //$config['base_url'] = 'http://localhost/resellerv2/'; // ganti folder localhostmu sendiri
-  $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . "/kangenkampung";
+  $_SERVER['DOCUMENT_ROOT'] = $_SERVER['DOCUMENT_ROOT'] . "/dms-wyu";
 }
 
 /*

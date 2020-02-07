@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Share extends MY_Controller
+class Pendaftaran extends MY_Controller
 {
 
 	public function __construct()
 	{
-		$this->load->model('M_share');
+		$this->load->model('M_pendaftaran');
 	}
 
 	public function index()
 	{
-		$data['content'] = 'share';
-		$data['active'] = 'share';
+		$data['content'] = 'pendaftaran';
+		$data['active'] = 'pendaftaran';
 		$this->load->view('template', $data);
 	}
 }

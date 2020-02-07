@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dokumen extends MY_Controller
+class Pengumuman extends MY_Controller
 {
 
 	public function __construct()
 	{
-		$this->load->model('M_dokumen');
+		$this->load->model('M_pengumuman');
 	}
 
 	public function index()
 	{
-		$data['content'] = 'dokumen';
-		$data['active'] = 'dokumen';
+		$data['content'] = 'pengumuman';
+		$data['active'] = 'pengumuman';
 		$this->load->view('template', $data);
 	}
 }

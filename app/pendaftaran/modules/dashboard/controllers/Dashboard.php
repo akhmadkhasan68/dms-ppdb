@@ -1,18 +1,18 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Dashboard extends MY_Controller {
+class Dashboard extends MY_Controller
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->load->model('M_dashboard');
-		$this->load->library('recaptcha');
 	}
 
-		public function index(){
+	public function index()
+	{
 		$data['content'] = 'dashboard';
 		$data['active'] = 'dashboard';
-		$this->load->view('template',$data);	
-		
+		$this->load->view('template', $data);
 	}
-    
 }
