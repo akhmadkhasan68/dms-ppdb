@@ -7,7 +7,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <center>
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Lambang_Kabupaten_Sumbawa.png" style="max-height: 230px">
+                                    <img src="<?php echo base_url(); ?>assets/logo.png" style="max-height: 230px">
                                     <div style="margin-top: 5px"></div>
                                     <h3>Selamat Datang</h3>
                                     <h3>Penerimaan Peserta Didik Baru</h3>

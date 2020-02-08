@@ -8,11 +8,9 @@ function addItemSerialize(url, type, param) {
         cache: false,
         processData: false,
         beforeSend: function () {
-            $('#page-load').show();
-            Swal.showLoading();
         },
         success: function (response) {
-            Swal.hideLoading();
+
             if (response.result) {
                 message("Selamat", response.message.body, "success", "info", 1000);
                 setTimeout(function () {
@@ -23,7 +21,7 @@ function addItemSerialize(url, type, param) {
             }
         },
         error: function (request, status, error) {
-            Swal.hideLoading();
+
             message("Mohon Maaf", "Silahkan Coba Kembali", "error", "info", 1000);
         }
     });
@@ -44,7 +42,7 @@ function addItemSerializeLogin(url, type, param) {
             $('#page-load').show();
         },
         success: function (response) {
-            Swal.hideLoading();
+
             if (response.result) {
                 message("Selamat", response.message.body, "success", "info", 1000);
                 location.reload();
@@ -53,7 +51,7 @@ function addItemSerializeLogin(url, type, param) {
             }
         },
         error: function (request, status, error) {
-            Swal.hideLoading();
+
             message("Mohon Maaf", "Silahkan Coba Kembali", "error", "info", 1000);
         }
     });
@@ -74,10 +72,10 @@ function addItemSerializecart(url, type, param) {
         },
         success: function (response) {
             location.reload()
-            Swal.hideLoading();
+
         },
         error: function (request, status, error) {
-            Swal.hideLoading();
+
             location.reload()
         }
     });
@@ -92,7 +90,7 @@ function ajaxShowData(url, type, param, callback) {
         contentType: false,
         cache: false,
         processData: false,
-        beforeSend: function () {},
+        beforeSend: function () { },
         success: callback,
         error: function (request, status, error) {
             alert(status);
@@ -155,7 +153,7 @@ function ajaxItemDelete(link, url, id) {
                     $('#page-load').show();
                 },
                 success: function (data) {
-                    Swal.hideLoading();
+
                     if (data.result) {
                         message("Selamat !", data.message.body, "success", "info", 1000);
                         setTimeout(function () {
@@ -167,7 +165,7 @@ function ajaxItemDelete(link, url, id) {
 
                 },
                 error: function (request, status, error) {
-                    Swal.hideLoading();
+
                     message("Mohon Maaf !", 'Please try again later', "error", "info", 1000);
                 }
             });
@@ -197,7 +195,7 @@ function ajaxItemDelete2(link, url, id) {
                     $('#page-load').show();
                 },
                 success: function (data) {
-                    Swal.hideLoading();
+
                     if (data.result) {
                         message("Selamat !", data.message.body, "success", "info", 1000);
                         setTimeout(function () {
@@ -209,7 +207,7 @@ function ajaxItemDelete2(link, url, id) {
 
                 },
                 error: function (request, status, error) {
-                    Swal.hideLoading();
+
                     message("Mohon Maaf !", 'Please try again later', "error", "info", 1000);
                 }
             });
@@ -260,3 +258,4 @@ function addNumber(nStr, symbol = false) {
     else
         return x1 + x2;
 }
+

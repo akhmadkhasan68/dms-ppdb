@@ -1,7 +1,9 @@
 <div class="app-main">
     <div class="app-sidebar sidebar-shadow bg-dark sidebar-text-light">
         <div class="app-header__logo">
-            <div class="logo-src"></div>
+            <div class="logo-src">
+                <h5>SMPN 1 ALAS BARAT </h5>
+            </div>
             <div class="header__pane ml-auto">
                 <div>
                     <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -89,7 +91,7 @@
                     </li>
                     <li class="app-sidebar__heading">Pengaturan</li>
                     <li>
-                        <a href="forms-controls.html">
+                        <a href="#" data-toggle="modal" data-target="#modal_setting">
                             <i class="metismenu-icon pe-7s-settings">
                             </i>Pengaturan
                         </a>
