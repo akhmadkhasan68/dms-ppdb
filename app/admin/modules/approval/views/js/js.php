@@ -12,7 +12,7 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#f5365c',
-            confirmButtonText: 'Ya, Ijinkan'
+            confirmButtonText: 'Ya'
         }).then((result) => {
             if (result.value) {}
         })
@@ -29,6 +29,21 @@
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#f5365c',
             confirmButtonText: 'Ya, Tolak'
+        }).then((result) => {
+            if (result.value) {}
+        })
+    }
+</script>
+<script>
+    function download() {
+        Swal.fire({
+            title: 'Unduh Persetujuan Ini !',
+            text: "Apakah anda ingin mengunduh persetujuan ini",
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#f5365c',
+            confirmButtonText: 'Ya, Unduh Persetujuan Ini'
         }).then((result) => {
             if (result.value) {}
         })

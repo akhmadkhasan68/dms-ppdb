@@ -35,7 +35,10 @@
                                     <th scope="row">1</th>
                                     <td>Dokumen A</td>
                                     <td>Dokumen_a.doc</td>
-                                    <td>Ya kepala Sekolah</td>
+                                    <td>
+                                        <div class="badge badge-success">Ya</div>
+                                        <div class="badge badge-info">Kepala Sekolah</div>
+                                    </td>
                                     <td>
                                         <div class="badge badge-warning">Menunggu Approval</div>
                                     </td>

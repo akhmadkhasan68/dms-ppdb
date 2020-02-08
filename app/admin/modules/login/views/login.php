@@ -89,25 +89,11 @@
                                                     <img src="<?php echo base_url(); ?>assets/logo.png" style="max-height: 230px;margin-top:40px">
                                                     <div style="margin-top: 5px"></div>
                                                     <h3>Selamat Datang</h3>
-                                                    <h3>Penerimaan Peserta Didik Baru</h3>
+                                                    <h3>Panitia Penerimaan Peserta Didik Baru</h3>
                                                     <h3><b>SMP NEGERI 1 ALAS BARAT</b></h3>
                                                 </center>
                                             </div>
                                             <div class="col-md-6 ">
-                                                <div class="card widget-content">
-                                                    <div class="widget-content-outer">
-                                                        <div class="widget-content-wrapper">
-                                                            <div class="widget-content-left">
-                                                                <div class="widget-heading">Jumlah Pendaftar</div>
-                                                                <div class="widget-subheading">Saat Ini</div>
-                                                            </div>
-                                                            <div class="widget-content-right">
-                                                                <div class="widget-numbers text-success">1896</div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <br>
                                                 <div class="card widget-content">
                                                     <div class="widget-content-outer">
                                                         <div class="widget-content-wrapper">

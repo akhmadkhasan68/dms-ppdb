@@ -67,8 +67,8 @@
                                 </div>
                             </div>
                             <div class="widget-content-right header-user-info ml-3">
-                                <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
-                                    <i class="fa text-white fa-calendar pr-1 pl-1"></i>
+                                <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example" onclick="logout()">
+                                    <i class="fa text-white fa-arrow-right pr-1 pl-1"></i>
                                 </button>
                             </div>
                         </div>
@@ -77,3 +77,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function logout() {
+            message("Selamat", "Anda telah logout", "success", "info", 1000);
+            window.location.href = "<?php echo base_url() . index_page(); ?>login";
+        }
+    </script>

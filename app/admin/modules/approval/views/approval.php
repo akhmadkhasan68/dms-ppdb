@@ -8,7 +8,7 @@
                         </i>
                     </div>
                     <div>Dokumen Yang Harus Di Setujui
-                        <div class="page-title-subheading">Semua data yang perluh di beri akses "ijinkan" akan terdaftar di halaman ini
+                        <div class="page-title-subheading">Semua data yang harus anda setujui ada di halaman ini
                         </div>
                     </div>
                 </div>
@@ -35,13 +35,16 @@
                                     <th scope="row">1</th>
                                     <td>Dokumen A</td>
                                     <td>Dokumen_a.doc</td>
-                                    <td>Bendahara</td>
+                                    <td>
+                                        <div class="badge badge-info">Kepala Sekolah</div>
+                                    </td>
                                     <td>
                                         <div class="badge badge-warning">Menunggu Approval</div>
                                     </td>
                                     <td style="text-align: center">
                                         <label><button class="mb-2 mr-2 btn btn-success" onclick="terima()">Terima</button></label>
                                         <label><button class="mb-2 mr-2 btn btn-danger" onclick="tolak()">Tolak</button></label>
+                                        <label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()">Download</button></label>
                                     </td>
                                 </tr>
                             </tbody>
