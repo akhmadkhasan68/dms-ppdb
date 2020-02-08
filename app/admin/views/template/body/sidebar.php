@@ -77,21 +77,27 @@
                     </li>
                     <li class="app-sidebar__heading">Pengelolalan User</li>
                     <li>
-                        <a href="dashboard-boxes.html">
+                        <a href="<?php echo base_url() . index_page(); ?>pendaftaran" <?php if ($active == "pendaftaran") {
+                                                                                            echo 'class="mm-active"';
+                                                                                        } ?>>
                             <i class="metismenu-icon pe-7s-add-user"></i>
                             Siswa Baru
                         </a>
                     </li>
 
                     <li>
-                        <a href="dashboard-boxes.html">
+                        <a href="<?php echo base_url() . index_page(); ?>pengguna" <?php if ($active == "pengguna") {
+                                                                                        echo 'class="mm-active"';
+                                                                                    } ?>>
                             <i class="metismenu-icon pe-7s-user"></i>
                             Pengguna
                         </a>
                     </li>
                     <li class="app-sidebar__heading">Pengaturan</li>
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#modal_setting">
+                        <a href="<?php echo base_url() . index_page(); ?>pengaturan" <?php if ($active == "pengaturan") {
+                                                                                            echo 'class="mm-active"';
+                                                                                        } ?>>
                             <i class="metismenu-icon pe-7s-settings">
                             </i>Pengaturan
                         </a>
