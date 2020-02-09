@@ -15,7 +15,7 @@
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
                     <label for="validationCustom01">NISN</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="Dokumen_a.doc" readonly>
+                    <input type="text" class="form-control" id="validationCustom01" placeholder="123456" readonly>
                 </div>
 
 

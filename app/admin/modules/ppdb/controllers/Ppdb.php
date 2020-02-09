@@ -9,7 +9,7 @@ class Ppdb extends MY_Controller
 		$this->load->model('M_ppdb');
 	}
 
-	public function dashboard()
+	public function index()
 	{
 		$data['content'] = 'dashboard/dashboard';
 		$data['active'] = 'dashboard';

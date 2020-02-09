@@ -25,7 +25,6 @@
                                     <th>No</th>
                                     <th>Nama Siswa</th>
                                     <th>NISN</th>
-                                    <th>Pengirim</th>
                                     <th style="text-align: center">Aksi</th>
                                 </tr>
                             </thead>
@@ -34,7 +33,6 @@
                                     <th scope="row">1</th>
                                     <td>Adi</td>
                                     <td>1231232112</td>
-                                    <td>kepala Sekolah</td>
                                     <td style="text-align: center">
                                         <label><button class="mb-2 mr-2 btn btn-primary" onclick="open_detail()">Detail</button></label>
                                         <label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#modal_verifikasi">Verifikasi</button></label>

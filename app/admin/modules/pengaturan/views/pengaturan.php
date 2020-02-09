@@ -58,8 +58,7 @@
                                 <label for="validationCustom01">Status PPDB</label>
                                 <select class="form-control" id="persetujuan">
                                     <option selected>Buka</option>
-                                    <option>Tutup</option>
-                                    <option>Di Tolak</option>
+                                    <option>Tutup</option>                                    
                                 </select>
                             </div>
 

@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
-                    <label for="validationCustom01">NISN</label>
+                    <label for="validationCustom01">Username</label>
                     <input type="text" class="form-control" id="validationCustom01" placeholder="">
                 </div>
 
@@ -56,7 +56,7 @@
                 </div>
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
-                    <label for="validationCustom01">NISN</label>
+                    <label for="validationCustom01">Username</label>
                     <input type="text" class="form-control" id="validationCustom01" placeholder="">
                 </div>
 
