@@ -96,6 +96,13 @@ if (!function_exists('unset_session')){
 	}
 }
 
+if (!function_exists('destroy_session')){
+	function destroy_session(){
+		$CI = &get_instance();
+		return $CI->session->sess_destroy();
+	}
+}
+
 function Delete($path)
 {
     if (is_dir($path) === true)
@@ -116,5 +123,15 @@ function Delete($path)
     }
 
     return false;
+}
+
+if (!function_exists('config_table')){
+	function config_table(){
+		$CI = &get_instance();
+		$CI->db->from("config");
+		$query = $CI->db->get();
+
+		return $query->row();
+	}
 }
 ?>

@@ -64,7 +64,7 @@
                                 <div class="widget-content-wrapper">
                                     <div class="widget-content-left  ml-3 header-user-info">
                                         <div class="widget-heading">
-                                            SMP NEGERI 1 ALAS BARAT
+                                            <?php echo $name;?>
                                         </div>
                                         <div class="widget-subheading">
                                             PPDB
@@ -86,11 +86,11 @@
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <center>
-                                                    <img src="<?php echo base_url(); ?>assets/logo.png" style="max-height: 230px;margin-top:40px">
+                                                    <img src="<?php echo base_url(); ?>uploads/config/<?php echo $logo;?>" style="max-height: 230px;margin-top:40px">
                                                     <div style="margin-top: 5px"></div>
                                                     <h3>Selamat Datang</h3>
                                                     <h3>Panitia Penerimaan Peserta Didik Baru</h3>
-                                                    <h3><b>SMP NEGERI 1 ALAS BARAT</b></h3>
+                                                    <h3><b><?php echo $name;?></b></h3>
                                                 </center>
                                             </div>
                                             <div class="col-md-6 ">
@@ -116,14 +116,11 @@
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col-md-12">
-                                                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Login Sebagai</label><select class="form-control">
-                                                                            <option>Kepala Sekolah</option>
-                                                                            <option>Waka Kesiswaan</option>
-                                                                            <option>Waka Kurikulum</option>
-                                                                            <option>Bendahara</option>
-                                                                            <option>Sekertaris</option>
-                                                                            <option>Anggota</option>
-                                                                        </select></div>
+                                                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Login Sebagai</label>
+                                                                        <select class="form-control" name="login_as" id="login_as">
+                                                                            
+                                                                        </select>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div style="text-align: right">
@@ -132,8 +129,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +155,34 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $(".loader").fadeOut();
-        })
+            
+            //AJAX GET LEVEL
+            $.ajax({
+                url: '<?php echo site_url('login/ajax_get_level')?>',
+                type: 'GET',
+                dataType:'json',
+                data: {
+                    <?php echo $this->security->get_csrf_token_name();?>: '<?php echo $this->security->get_csrf_hash();?>'
+                },
+                beforeSend: function() {
+                    $(".loader").show();
+                },
+                success: function(response){
+                    var html = '';
+                    var i;
+
+                    for(i = 0; i < response.data.length; i++){
+                        html += `
+                            <option value='`+ response.data[i].id_level +`'>`+ response.data[i].name +`</option>
+                        `;
+                    }
+
+                    $("#login_as").html(html);
+                }
+            }); 
+
+
+        });
     </script>
 </body>
 
