@@ -76,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            <form method="post" name="form_login" id="form_login">
             <div class="app-main">
                 <div class="app-main__outer">
                     <div class="app-main__inner">
@@ -111,7 +112,7 @@
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col-md-12">
-                                                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Password</label><input name="password" id="password" placeholder="" type="text" class="form-control"></div>
+                                                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Password</label><input name="password" id="password" placeholder="" type="password" class="form-control"></div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
@@ -123,8 +124,9 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash(); ?>"/>                                                            
                                                             <div style="text-align: right">
-                                                                <input type="button" class="btn btn-primary btn-lg" value="Login" style="width:100%" onclick="login()">
+                                                                <input type="submit" class="btn btn-primary btn-lg" value="Login" style="width:100%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -138,6 +140,7 @@
                     </div>
                 </div>
             </div>
+            </form>
         </div>
 
 

@@ -152,7 +152,7 @@ class Login extends MY_Controller
 		$json_data = [
 			'result' => true,
 			'form_error' => '',
-			'message' => ['head' => 'Berhasil', 'body' => 'Selamat datang .'.$name],
+			'message' => ['head' => 'Berhasil', 'body' => 'Selamat datang '.$name],
 			'redirect' => $this->config->item('index_page').'dashboard'
 		];
 		print json_encode($json_data);

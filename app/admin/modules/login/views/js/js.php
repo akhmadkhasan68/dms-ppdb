@@ -1,23 +1,18 @@
 <script>
     var base_url = '<?php echo base_url()?>';
 
-    function login() {
+    $("#form_login").submit(function(){
         // message("Selamat", "Login Berhasil", "success", "info", 1000);
 		// window.location.href = "<?php echo base_url() . 'dashboard'; ?>"
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var login_as = $("#login_as").val();
+        // var username = $("#username").val();
+        // var password = $("#password").val();
+        // var login_as = $("#login_as").val();
 
         $.ajax({
             url: '<?php echo site_url('login/ajax_action_login');?>',
             type: 'POST',
             dataType: 'json',
-            data: {
-                <?php echo $this->security->get_csrf_token_name();?>: '<?php echo $this->security->get_csrf_hash(); ?>',
-                username: username,
-                password: password,
-                login_as: login_as
-            },
+            data: $( this ).serialize(),
             beforeSend: function() {
                 $(".loader").show();
             },
@@ -39,5 +34,7 @@
                 alert("Error data!");
             }
         });
-    }
+
+        return false;
+    })    
 </script>
