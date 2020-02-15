@@ -1,6 +1,8 @@
 <script>
     $(document).ready(function() {
-        $('#table_dokumen').DataTable();
+        var form_data = new FormData();
+        form_data.append('<?php echo $this->security->get_csrf_token_name(); ?>', '<?php echo $this->security->get_csrf_hash(); ?>');
+        dataTableShow("#table_dokumen", "<?php echo base_url() . $this->config->item('index_page'); ?>dokumen/ajax_list_dokumen", form_data);
     });
 </script>
 <script>
