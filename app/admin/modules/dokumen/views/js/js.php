@@ -1,6 +1,6 @@
 <script>
     $(document).ready(function() {
-        $('#table_dokumen').DataTable();
+        $("#table_dokumen").DataTable();
     });
 </script>
 <script>

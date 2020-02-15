@@ -8,7 +8,11 @@ class Dashboard extends MY_Controller
 	{
 		$this->load->model('M_dashboard');
 		$this->load->helper('common');
-		// $this->load->library('recaptcha');
+		
+		if($this->session->userdata('logged_in') == FALSE)
+		{
+			redirect('login');
+		}
 	}
 
 	public function index()
@@ -17,9 +21,9 @@ class Dashboard extends MY_Controller
 		$data['content'] = 'dashboard';
 		$data['active'] = 'dashboard';
 		$data['config'] = config_table();
+		$data['get_admin'] = get_admin();
 
 		$this->load->view('template',$data);	
-		
 	}
     
 }

@@ -12,7 +12,8 @@
     <meta name="msapplication-tap-highlight" content="no">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/sweetalert2.min.css">
     <link href="<?php echo base_url(); ?>assets/admin/main.css" rel="stylesheet">
-    <script src="<?php echo base_url(); ?>assets/admin/scripts/jquary.min.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/admin/scripts/jquary.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <link href="<?php echo base_url(); ?>assets/admin/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script type="text/javascript" src="<?php echo base_url(); ?>assets/ajaxFunction.js"></script>
 </head>

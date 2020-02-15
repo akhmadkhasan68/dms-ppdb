@@ -134,4 +134,17 @@ if (!function_exists('config_table')){
 		return $query->row();
 	}
 }
+
+if (!function_exists('get_admin')){
+	function get_admin(){
+		$CI = &get_instance();
+		$CI->db->select("a.id, a.id_level, a.email, a.name, a.username, l.name as level");
+		$CI->db->from("admin a");
+		$CI->db->join("level l", "l.id_level = a.id_level");
+		$CI->db->where("a.is_active = 1");
+		$query = $CI->db->get();
+
+		return $query->result();
+	}
+}
 ?>

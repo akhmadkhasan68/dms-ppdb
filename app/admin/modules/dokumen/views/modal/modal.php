@@ -9,18 +9,18 @@
             </div>
             <div class="modal-body">
                 <div class="col-md-12 mb-12">
-                    <label for="validationCustom01">Nama</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="Dokumen A" readonly>
+                    <label for="">Nama</label>
+                    <input type="text" class="form-control" id="" placeholder="Dokumen A" readonly>
                 </div>
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
-                    <label for="validationCustom01">File</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="Dokumen_a.doc" readonly>
+                    <label for="">File</label>
+                    <input type="text" class="form-control" id="" placeholder="Dokumen_a.doc" readonly>
                 </div>
 
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
-                    <label for="validationCustom01">Kirim Ke</label>
+                    <label for="">Kirim Ke</label>
                     <select class="form-control" id="persetujuan">
                         <option>Kepala Sekolah</option>
                         <option>Waka Kesiswaan</option>
@@ -48,17 +48,17 @@
             </div>
             <div class="modal-body">
                 <div class="col-md-12 mb-12">
-                    <label for="validationCustom01">Nama</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="Masukkan Nama file Anda" required>
+                    <label for="">Nama</label>
+                    <input type="text" class="form-control" id="" placeholder="Masukkan Nama file Anda" required>
                 </div>
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
-                    <label for="validationCustom01">File</label>
-                    <input type="file" class="form-control" id="validationCustom01" required>
+                    <label for="">File</label>
+                    <input type="file" class="form-control" id="" required>
                 </div>
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
-                    <label for="validationCustom01">Persetujuan</label>
+                    <label for="">Persetujuan</label>
                     <select class="form-control" id="persetujuan">
                         <option>Ya</option>
                         <option>Tidak</option>
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col-md-12 mb-12" style="margin-top: 5px">
-                    <label for="validationCustom01">Persetujuan Ke</label>
+                    <label for="">Persetujuan Ke</label>
                     <select class="form-control" id="persetujuan">
                         <option>Kepala Sekolah</option>
                         <option>Waka Kesiswaan</option>

@@ -111,7 +111,7 @@
                                                             </div>
                                                             <div class="form-row">
                                                                 <div class="col-md-12">
-                                                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Password</label><input name="password" id="password" placeholder="" type="text" class="form-control"></div>
+                                                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Password</label><input name="password" id="password" placeholder="" type="password" class="form-control"></div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-row">
