@@ -22,6 +22,7 @@ class Dokumen extends MY_Controller
 		$data['active'] = 'dokumen';
 		$data['config'] = config_table();
 		$data['get_admin'] = get_admin();
+		$data['notif_approve_doc'] = count_notif_approve_doc();
 
 		$this->load->view('template', $data);
 	}
@@ -195,5 +196,77 @@ class Dokumen extends MY_Controller
 
 			print json_encode($data);
 		}
+	}
+
+	public function ajax_list_dokumen()
+	{
+		$column = "a.id, a.id_admin, a.name, a.file, a.is_approval, a.is_shared, a.shared_by, a.created_at, d.id as id_approval, d.id_admin, d.status";
+		$column_order = array('a.id', 'name');
+		$column_search = array('a.id', 'name');
+		$order = array('a.id' => 'DESC');
+		$where = "a.id_admin = ".$this->session->userdata('id');
+		$group = "d.id_document";
+		$table = "document a";
+		$joins = [
+			[
+				"table" => "document_approval d",
+				"condition" => "d.id_document = a.id",
+				"jointype" => "left"
+			]
+		];
+
+		$list = $this->M_dokumen->get_datatables($column, $table, $column_order, $column_search, $order, $where, $joins, $group);
+
+		$data = array();
+		$no = $_POST['start']+1;
+
+		foreach ($list as $key) {
+			$row = array();
+			$row[] = $no++;
+			$row[] = $key->name;
+			$row[] = $key->file;
+
+			if($key->is_approval == 1)
+			{
+				$row[] = '<div class="badge badge-success">Ya</div>';
+			}else
+			{
+				$row[] = '<div class="badge badge-danger">Tidak</div>';
+			}
+
+			if($key->status == "BELUM")
+			{
+				$row[] = '<div style="cursor:pointer;" class="badge badge-warning" onclick="showApproval('.$key->id.')" >Menunggu Approval</div>';
+			}
+			elseif($key->status == "DITERIMA")
+			{
+				$row[] = "<div class='badge badge-success'>Approval Diterima</div>";
+			}
+			elseif($key->status == "DITOLAK")
+			{
+				$row[] = "<div class='badge badge-danger'>Approval Ditolak</div>";
+			}
+			else
+			{
+				$row[] = '<div class="badge badge-info">Tidak Membutuhkan Approval</div>';
+			}
+			
+			$row[] = '
+				<label><button class="mb-2 mr-2 btn btn-primary" data-toggle="modal" data-target="#modal_edit_dokument"><i class="fa fa-pen"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#modal_send_dokument"><i class="fa fa-paper-plane"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove()"><i class="fa fa-trash"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()"><i class="fa fa-download"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-success" onclick="download()"><i class="fa fa-print"></i></button></label>
+			';
+			$data[] = $row;
+		}
+
+		$output = array(
+			"draw" => $_POST['draw'],
+			"recordsTotal" => $this->M_dokumen->count_all($table, $where, $joins),
+			"recordsFiltered" => $this->M_dokumen->count_filtered($column, $table, $column_order, $column_search, $order, $where, $joins),
+			"data" => $data,
+		);
+		echo json_encode($output);
 	}
 }
