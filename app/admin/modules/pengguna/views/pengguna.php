@@ -29,6 +29,7 @@
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Level</th>
+                                    <th>Status User</th>
                                     <th style="text-align: center">Aksi</th>
                                 </tr>
                             </thead>
@@ -38,6 +39,7 @@
                                     <td>Adi</td>
                                     <td>Adi</td>
                                     <td>kepala Sekolah</td>
+                                    <td><div class="badge badge-danger">User Nonaktif</div></td>
                                     <td style="text-align: center">
                                         <label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#edit_pengguna">Edit</button></label>
                                         <label><button class="mb-2 mr-2 btn btn-danger" onclick="remove()">Hapus</button></label>

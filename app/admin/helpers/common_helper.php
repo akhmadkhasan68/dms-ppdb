@@ -142,6 +142,29 @@ if (!function_exists('get_admin')){
 		$CI->db->from("admin a");
 		$CI->db->join("level l", "l.id_level = a.id_level");
 		$CI->db->where("a.is_active = 1");
+		$CI->db->where("a.id != ".$CI->session->userdata('id'));
+		$query = $CI->db->get();
+
+		return $query->result();
+	}
+}
+
+if (!function_exists('count_notif_approve_doc')){
+	function count_notif_approve_doc(){
+		$CI = &get_instance();
+		$CI->db->from("document_approval");
+		$CI->db->where("id_admin = ".$CI->session->userdata('id'));
+		$query = $CI->db->get();
+
+		return $query->num_rows();
+	}
+}
+
+if (!function_exists('get_level')){
+	function get_level(){
+		$CI = &get_instance();
+		$CI->db->select("*");
+		$CI->db->from("level");
 		$query = $CI->db->get();
 
 		return $query->result();

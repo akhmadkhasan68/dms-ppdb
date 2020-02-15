@@ -1,6 +1,8 @@
 <script>
     $(document).ready(function() {
-        $('#table_approval').DataTable();
+        var form_data = new FormData();
+        form_data.append('<?php echo $this->security->get_csrf_token_name(); ?>', '<?php echo $this->security->get_csrf_hash(); ?>');
+        dataTableShow("#table_approval", "<?php echo base_url() . $this->config->item('index_page'); ?>approval/ajax_list_approval", form_data);
     });
 </script>
 <script>

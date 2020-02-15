@@ -142,7 +142,9 @@
                 if(response.result == true)
                 {
                     message(response.message.head, response.message.body, "success", "info", 1000);
-                    window.location.replace(base_url + response.redirect);
+                    setInterval(function(){ 
+                        window.location.replace(base_url + response.redirect);
+                    }, 1000);
                 }
             },
             error: function(){

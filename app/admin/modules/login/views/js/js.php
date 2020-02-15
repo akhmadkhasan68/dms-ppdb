@@ -2,12 +2,6 @@
     var base_url = '<?php echo base_url()?>';
 
     $("#form_login").submit(function(){
-        // message("Selamat", "Login Berhasil", "success", "info", 1000);
-		// window.location.href = "<?php echo base_url() . 'dashboard'; ?>"
-        // var username = $("#username").val();
-        // var password = $("#password").val();
-        // var login_as = $("#login_as").val();
-
         $.ajax({
             url: '<?php echo site_url('login/ajax_action_login');?>',
             type: 'POST',
@@ -27,7 +21,9 @@
                 if(response.result == true)
                 {
                     message(response.message.head, response.message.body, "success", "info", 1000);
-                    window.location.replace(base_url + response.redirect);
+                    setInterval(function(){ 
+                        window.location.replace(base_url + response.redirect);
+                    }, 1000);
                 }
             },
             error: function(){

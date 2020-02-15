@@ -64,7 +64,7 @@
                                                                                         echo 'class="mm-active"';
                                                                                     } ?>>
                             <i class="metismenu-icon pe-7s-check"></i>
-                            Approval Dokumen
+                            Approval Dokumen <div class="mb-2 mr-2 badge badge-pill badge-primary"><?php echo $notif_approve_doc;?></div>
                         </a>
                     </li>
                     <li>
