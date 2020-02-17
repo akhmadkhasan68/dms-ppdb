@@ -19,6 +19,9 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Dokumen</h5>
+
+                        <button class="mb-2 mr-2 btn btn-primary" data-toggle="modal" data-target="#modal_detail_approval" id="show-modal-approval" style="display:none;">aaa</button>
+
                         <table class="mb-0 table table-striped" id="table_dokumen" style="width:100%">
                             <thead>
                                 <tr>

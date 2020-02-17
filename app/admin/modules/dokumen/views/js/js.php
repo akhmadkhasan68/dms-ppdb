@@ -22,7 +22,7 @@
 
     function showApproval(id)
     { 
-        $("#modal_detail_approval").show();
+        $("#show-modal-approval").trigger('click');
     }
 </script>
 

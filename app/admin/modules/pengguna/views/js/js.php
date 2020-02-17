@@ -38,6 +38,41 @@
                 }
             });
         });
+
+        $("#form-edit-user").submit(function(e){
+            e.preventDefault();
+            var data = $(this).serialize();
+            
+            $.ajax({
+                url: '<?php echo site_url('pengguna/ajax_action_edit_user');?>',
+                type: 'POST',
+                dataType: 'JSON',
+                data: data,
+                beforeSend: function(){
+                    $(".loader").show();
+                },
+                success: function(response){
+                    $(".loader").hide();
+
+                    if(response.result == false)
+                    {
+                        message(response.message.head, response.message.body, "error", "info");
+                    }
+
+                    if(response.result == true)
+                    {
+                        message(response.message.head, response.message.body, "success", "info", 1000);
+                        setInterval(function(){ 
+                            window.location.replace(base_url + response.redirect);
+                        }, 1000);
+                    }
+                    console.log(response);
+                },
+                error: function(){
+                    alert('Error Data!');
+                }
+            });
+        });
     });
 </script>
 
@@ -91,6 +126,7 @@
             }
         })
     }
+
     function activeUser(id, is_active) {
         if(is_active == 1){
             var title = 'Aktifkan pengguna ini ?';
@@ -148,5 +184,34 @@
                 });
             }
         })
+    }
+
+    function editUser(id)
+    {   
+        $.ajax({
+            url: '<?php echo site_url('pengguna/ajax_get_user_id');?>',
+            type: 'GET',
+            dataType: 'JSON',
+            data: {
+                id: id,
+                <?php echo $this->security->get_csrf_token_name();?>: '<?php echo $this->security->get_csrf_hash();?>'
+            },
+            success: function(response)
+            {   
+                //SET VALUE
+                $("#id-admin").val(response.data.id);
+                $("#name-edit").val(response.data.name);
+                $("#username-edit").val(response.data.username);
+                $("#level-edit").val(response.data.id_level);
+
+                
+                //TRIGGER SHOW MODAL
+                $("#show-modal-edit").trigger('click');
+            },
+            error: function(){
+                alert("Error Data!");
+            }
+        });
+
     }
 </script>

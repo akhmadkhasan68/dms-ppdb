@@ -67,13 +67,13 @@ class Pengguna extends MY_Controller
 			if($key->is_active != 1){
 				$action = '
 					<label><button class="mb-2 mr-2 btn btn-success" onclick="activeUser('.$key->id.', 1)">Aktifkan User</button></label>
-					<label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#edit_pengguna">Edit</button></label>
+					<label><button class="mb-2 mr-2 btn btn-info" onclick="editUser('.$key->id.')">Edit</button></label>
 					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')">Hapus</button></label>
 				';
 			}else{
 				$action = '
 					<label><button class="mb-2 mr-2 btn btn-warning" onclick="activeUser('.$key->id.', 0)">Nonktifkan User</button></label>
-					<label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#edit_pengguna">Edit</button></label>
+					<label><button class="mb-2 mr-2 btn btn-info" onclick="editUser('.$key->id.')">Edit</button></label>
 					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')">Hapus</button></label>
 				';
 			}
@@ -91,6 +91,20 @@ class Pengguna extends MY_Controller
 			"data" => $data,
 		);
 		echo json_encode($output);
+	}
+
+	public function ajax_get_user_id()
+	{
+		$id = $this->input->get('id');
+
+		$data = $this->M_pengguna->get_row("*","admin","id = $id");
+
+		$json_data = [
+			'result' => TRUE,
+			'data' => $data
+		];
+
+		print json_encode($json_data);
 	}
 
 	public function ajax_action_add_user()
@@ -121,7 +135,7 @@ class Pengguna extends MY_Controller
 		$id_level = $this->input->post('id_level');
 
 		//CHECK USER
-		$select_user = $this->M_pengguna->get_row("*","admin","name = '$name' AND username = '$username'");
+		$select_user = $this->M_pengguna->get_row("*","admin","name = '$name' OR username = '$username'");
 
 		if(count($select_user) > 0)
 		{
@@ -161,6 +175,81 @@ class Pengguna extends MY_Controller
 			'result' => TRUE,
 			'form_error' => "",
 			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil menambahkan data user!'],
+			'redirect' => $this->config->item('index_page').'pengguna'
+		];
+
+		print json_encode($json_data);
+	}
+
+	public function ajax_action_edit_user()
+	{
+		$id = $this->input->post('id');
+		$name = $this->input->post('name');
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		$level = $this->input->post('id_level');
+
+		//SET VALIDATION
+		$this->form_validation->set_rules('name', 'name', 'required');
+		$this->form_validation->set_rules('username', 'username', 'required');
+		$this->form_validation->set_rules('id_level', 'id_level', 'required');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			$error = $this->form_validation->error_array();
+
+			$json_data = [
+				'result' => FALSE,
+				'form_error' => $error,
+				'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+				'redirect' => ''
+			];
+
+			print json_encode($json_data);
+			die();
+		}
+
+		//CHECK USER
+		$select_user = $this->M_pengguna->get_row("*","admin","(name = '$name' OR username = '$username') AND id != $id");
+
+		if(count($select_user) > 0)
+		{
+			$json_data = [
+				'result' => FALSE,
+				'form_error' => "",
+				'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, user sudah ada!'],
+				'redirect' => ''
+			];
+
+			print json_encode($json_data);
+			die();
+		}
+
+		//SET DATA IF PASSWORD IS NULL
+		if($password == "")
+		{
+			$data = [
+				'name' => $name,
+				'username' => $username,
+				'id_level' => $level
+			];
+		}else{
+			$data = [
+				'name' => $name,
+				'username' => $username,
+				'password' => $password,
+				'id_level' => $level
+			];
+		}
+
+		//UPDATE USER
+		$update_user = $this->M_pengguna->update_table("admin",$data,"id",$id);
+
+		//IF UPDATE SUCCESS
+		$json_data = [
+			'result' => TRUE,
+			'form_error' => "",
+			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil merubah data user!'],
 			'redirect' => $this->config->item('index_page').'pengguna'
 		];
 

@@ -21,6 +21,7 @@
                         <h5 class="card-title">Pengguna</h5>
                         <div style="text-align: right">
                             <button class="mb-2 mr-2 btn btn-primary btn-lg " data-toggle="modal" data-target="#add_pengguna">Tambah Pengguna</button>
+                            <button data-toggle="modal" data-target="#edit_pengguna" style="display:none;" id="show-modal-edit">halo</button>
                         </div>
                         <table class="mb-0 table table-striped" id="table_dokumen" style="width:100%">
                             <thead>
