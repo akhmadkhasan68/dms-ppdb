@@ -46,7 +46,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".loader").fadeOut();
-    })
+    });
 </script>
 </body>
 

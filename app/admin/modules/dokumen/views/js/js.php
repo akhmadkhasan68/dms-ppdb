@@ -19,6 +19,11 @@
             if (result.value) {}
         })
     }
+
+    function showApproval(id)
+    { 
+        $("#show-modal-approval").trigger('click');
+    }
 </script>
 
 <script>

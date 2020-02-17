@@ -9,6 +9,11 @@ class Login extends MY_Controller
 		$this->load->model('M_login');
 		$this->load->helper('common');
 		$this->load->library(array('form_validation', 'session'));
+
+		if($this->session->userdata('logged_in') == TRUE)
+		{
+			redirect('dashboard');
+		}
 	}
 
 	public function index()
