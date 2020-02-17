@@ -19,6 +19,9 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Dokumen</h5>
+
+                        <button data-toggle="modal" id="show-modal-send" data-target="#modal_send_dokument" style="display:none;">send</button>
+
                         <table class="mb-0 table table-striped" id="table_share" style="width:100%">
                             <thead>
                                 <tr>

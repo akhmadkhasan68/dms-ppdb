@@ -153,7 +153,20 @@ if (!function_exists('count_notif_approve_doc')){
 	function count_notif_approve_doc(){
 		$CI = &get_instance();
 		$CI->db->from("document_approval");
-		$CI->db->where("id_admin = ".$CI->session->userdata('id'));
+		$CI->db->where("id_admin", $CI->session->userdata('id'));
+		$CI->db->where("status", "BELUM");
+		$query = $CI->db->get();
+
+		return $query->num_rows();
+	}
+}
+
+if (!function_exists('count_notif_share_doc')){
+	function count_notif_share_doc(){
+		$CI = &get_instance();
+		$CI->db->from("document");
+		$CI->db->where("id_admin", $CI->session->userdata('id'));
+		$CI->db->where("is_shared", '1');
 		$query = $CI->db->get();
 
 		return $query->num_rows();

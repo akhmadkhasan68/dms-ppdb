@@ -23,6 +23,7 @@ class Dashboard extends MY_Controller
 		$data['config'] = config_table();
 		$data['get_admin'] = get_admin();
 		$data['notif_approve_doc'] = count_notif_approve_doc();
+		$data['notif_share_doc'] = count_notif_share_doc();
 
 		$this->load->view('template',$data);	
 	}

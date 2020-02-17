@@ -212,6 +212,5 @@
                 alert("Error Data!");
             }
         });
-
     }
 </script>

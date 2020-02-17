@@ -72,7 +72,7 @@
                                                                                     echo 'class="mm-active"';
                                                                                 } ?>>
                             <i class="metismenu-icon pe-7s-share"></i>
-                            Sharing Dokumen
+                            Sharing Dokumen <div class="mb-2 mr-2 badge badge-pill badge-primary"><?php echo $notif_share_doc;?></div>
                         </a>
                     </li>
 

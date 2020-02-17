@@ -22,6 +22,7 @@ class Approval extends MY_Controller
 		$data['config'] = config_table();
 		$data['get_admin'] = get_admin();
 		$data['notif_approve_doc'] = count_notif_approve_doc();
+		$data['notif_share_doc'] = count_notif_share_doc();
 		
 		$this->load->view('template', $data);
 	}
@@ -83,9 +84,9 @@ class Approval extends MY_Controller
 			}
 
 			$row[] = '
-				<label><button class="mb-2 mr-2 btn btn-success" onclick="terima()"><i class="fa fa-check"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-danger" onclick="tolak()"><i class="fa fa-window-close"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()"><i class="fa fa-download"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-success" onclick="terima('.$key->id.')"><i class="fa fa-check"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-danger" onclick="tolak('.$key->id.')"><i class="fa fa-window-close"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
 			';
 			$data[] = $row;
 		}
@@ -97,5 +98,39 @@ class Approval extends MY_Controller
 			"data" => $data,
 		);
 		echo json_encode($output);
+	}
+
+	public function ajax_action_approve()
+	{
+		$id = $this->input->post('id');
+		$status = $this->input->post('status');
+
+		$data = [
+			'status' => $status
+		];
+
+		$update_data = $this->M_approval->update_table2("document_approval",$data,"id = $id");
+
+		if($update_data == FALSE)
+		{
+			$json_data = [
+				'result' => FALSE,
+				'form_error' => '',
+				'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada kesalahan saat mengubah data, coba ulangi beberapa saat lagi!'],
+				'redirect' => ''
+			];
+
+			print json_encode($json_data);
+			die();
+		}
+
+		$json_data = [
+			'result' => TRUE,
+			'form_error' => '',
+			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil mengubah data!'],
+			'redirect' => $this->config->item('index_page').'approval'
+		];
+
+		print json_encode($json_data);
 	}
 }

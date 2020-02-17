@@ -22,15 +22,16 @@ class Share extends MY_Controller
 		$data['config'] = config_table();
 		$data['get_admin'] = get_admin();
 		$data['notif_approve_doc'] = count_notif_approve_doc();
+		$data['notif_share_doc'] = count_notif_share_doc();
 		
 		$this->load->view('template', $data);
 	}
 
 	public function ajax_list_sharing()
 	{
-		$column = "a.name, a.file, a.is_approval, a.is_shared, a.shared_by, d.name as name_admin, d.username, l.name as level";
-		$column_order = array('a.id', 'd.name');
-		$column_search = array('a.id', 'd.name');
+		$column = "a.id, a.name, a.file, a.is_approval, a.is_shared, a.shared_by, d.name as name_admin, d.username, l.name as level";
+		$column_order = array('a.id', 'a.name', 'd.name');
+		$column_search = array('a.id', 'a.name', 'd.name');
 		$order = array('a.id' => 'DESC');
 		$where = "a.id_admin = ".$this->session->userdata('id')." AND is_shared = 1";
 		$group = "";
@@ -61,7 +62,7 @@ class Share extends MY_Controller
 			$row[] = $key->name_admin." (".$key->level.")";
 
 			$row[] = '
-				<label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#modal_send_dokument"><i class="fa fa-paper-plane"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')""><i class="fa fa-paper-plane"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()"><i class="fa fa-download"></i></button></label>
 			';
 			$data[] = $row;
