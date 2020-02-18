@@ -8,9 +8,10 @@ function addItemSerialize(url, type, param) {
         cache: false,
         processData: false,
         beforeSend: function () {
+            $(".loader").fadeIn();
         },
         success: function (response) {
-
+            $(".loader").fadeOut();
             if (response.result) {
                 message("Selamat", response.message.body, "success", "info", 1000);
                 setTimeout(function () {
@@ -21,7 +22,7 @@ function addItemSerialize(url, type, param) {
             }
         },
         error: function (request, status, error) {
-
+            $(".loader").fadeOut();
             message("Mohon Maaf", "Silahkan Coba Kembali", "error", "info", 1000);
         }
     });
