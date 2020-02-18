@@ -173,6 +173,17 @@ if (!function_exists('count_notif_share_doc')){
 	}
 }
 
+if (!function_exists('userdata')){
+	function userdata(){
+		$CI = &get_instance();
+		$CI->db->from("admin");
+		$CI->db->where("id", $CI->session->userdata('id'));
+		$query = $CI->db->get();
+
+		return $query->row();
+	}
+}
+
 if (!function_exists('get_level')){
 	function get_level(){
 		$CI = &get_instance();
