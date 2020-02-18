@@ -36,7 +36,7 @@
                                     <td>Dokumen A</td>
                                     <td>Dokumen_a.doc</td>
                                     <td>
-                                        <div class="badge badge-info">Kepala Sekolah</div>
+                                        <div class="badge badge-info">Panitia</div>
                                     </td>
                                     <td>
                                         <div class="badge badge-warning">Menunggu Approval</div>

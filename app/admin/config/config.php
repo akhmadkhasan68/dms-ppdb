@@ -473,37 +473,10 @@ $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = FALSE;
 $config['csrf_exclude_uris'] = array(
-  'admin/ajax_action_datatable_admin',
-  'admin/ajax_action_get_admin',
-  'category/ajax_list_category',
-  'category/ajax_action_get_category',
-  'category/ajax_action_get_all_category',
-  'kurir/ajax_list_kurir',
-  'kurir/ajax_action_get_kurir',
-  'payment_method/ajax_list_payment_method',
-  'payment_method/ajax_action_get_payment_method',
-  'payment_account/ajax_action_datatable_payment_account',
-  'payment_account/ajax_action_get_payment_account',
-  'payment_method/ajax_action_get_payment_method_all',
-  'sys_api/ajax_action_datatable_api_key',
-  'sys_api/ajax_action_get_api_key',
-  'level/ajax_action_get_menu',
-  'level/ajax_action_get_level',
-  'level/ajax_action_datatable_level',
-  'merchant/ajax_list_merchant',
-  'merchant/ajax_action_get_all',
-  'merchant/ajax_action_get_merchant',
-  'product/get_data_product_by_id',
-  'product/get_data_product_by_all',
-  'banner/ajax_list_banner',
-  'banner/ajax_action_get_banner',
-  'member/ajax_action_datatable_member',
-  'kurir/get_data_ongkir',
-  'pemesanan/ajax_action_datatable_pemesanan',
-  'mutasi/ajax_action_datatable_mutasi',
-  'withdraw/ajax_action_datatable_withdraw',
-  'level/ajax_action_get_all_level',
-  'product/ajax_action_datatable_product'
+  'dokumen/ajax_list_dokumen',
+  'approval/ajax_list_approval',
+  'share/ajax_list_sharing',
+  'pengguna/ajax_list_user'
 );
 
 /*

@@ -21,6 +21,7 @@
                         <h5 class="card-title">Pengguna</h5>
                         <div style="text-align: right">
                             <button class="mb-2 mr-2 btn btn-primary btn-lg " data-toggle="modal" data-target="#add_pengguna">Tambah Pengguna</button>
+                            <button data-toggle="modal" data-target="#edit_pengguna" style="display:none;" id="show-modal-edit">halo</button>
                         </div>
                         <table class="mb-0 table table-striped" id="table_dokumen" style="width:100%">
                             <thead>
@@ -29,6 +30,7 @@
                                     <th>Name</th>
                                     <th>Username</th>
                                     <th>Level</th>
+                                    <th>Status User</th>
                                     <th style="text-align: center">Aksi</th>
                                 </tr>
                             </thead>
@@ -38,6 +40,7 @@
                                     <td>Adi</td>
                                     <td>Adi</td>
                                     <td>kepala Sekolah</td>
+                                    <td><div class="badge badge-danger">User Nonaktif</div></td>
                                     <td style="text-align: center">
                                         <label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#edit_pengguna">Edit</button></label>
                                         <label><button class="mb-2 mr-2 btn btn-danger" onclick="remove()">Hapus</button></label>

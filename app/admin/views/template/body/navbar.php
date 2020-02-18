@@ -60,14 +60,14 @@
                             </div>
                             <div class="widget-content-left  ml-3 header-user-info">
                                 <div class="" style="color: white">
-                                    Admin
+                                    <?php echo $this->session->userdata('username');?>
                                 </div>
                                 <div class="widget-subheading">
-                                    Kepala Sekolah
+                                    <?php echo $this->session->userdata('level');?>
                                 </div>
                             </div>
                             <div class="widget-content-right header-user-info ml-3">
-                                <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example" onclick="logout()">
+                                <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example" id="logout">
                                     <i class="fa text-white fa-arrow-right pr-1 pl-1"></i>
                                 </button>
                             </div>
@@ -79,8 +79,24 @@
     </div>
 
     <script>
-        function logout() {
-            message("Selamat", "Anda telah logout", "success", "info", 1000);
-            window.location.href = "<?php echo base_url() . index_page(); ?>login";
-        }
+        $("#logout").click(function(){
+            $.ajax({
+                url: '<?php echo site_url('Logout/ajax_action_logout')?>',
+                type: 'POST',
+                data: {
+                    <?php echo $this->security->get_csrf_token_name();?>: '<?php echo $this->security->get_csrf_hash();?>'
+                },
+                beforeSend: function(){
+                    $(".loader").show();
+                },
+                success: function(){
+                    $(".loader").hide();
+                    message("Selamat", "Anda telah logout", "success", "info", 1000);
+                    window.location.href = "<?php echo base_url() . index_page(); ?>login";
+                },
+                error: function(){
+                    alert("Error Data");
+                }
+            });
+        });
     </script>

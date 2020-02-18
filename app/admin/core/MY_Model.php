@@ -129,7 +129,7 @@ function update_table2($table,$data,$where){
   
 
   /* --------------------------------------------------------------------------------------------------- */
-    public function _get_datatables_query($column,$table,$column_order,$column_search,$default_order,$where,$joins)
+    public function _get_datatables_query($column,$table,$column_order,$column_search,$default_order,$where,$joins,$group = NULL)
     {
         $this->db->select($column);
         $this->db->from($table);
@@ -168,7 +168,11 @@ function update_table2($table,$data,$where){
         if($where!=""){
           $this->db->where($where);
         }
-         
+
+        if($group!=""){
+          $this->db->group_by($group);
+        }
+
         if(isset($_POST['order'])) // here order processing
         {
             $this->db->order_by($column_order[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
@@ -180,9 +184,9 @@ function update_table2($table,$data,$where){
         }
     }
  
-    function get_datatables($column,$table,$column_order,$column_search,$default_order,$where,$joins)
+    function get_datatables($column,$table,$column_order,$column_search,$default_order,$where,$joins, $group)
     {
-        $this->_get_datatables_query($column,$table,$column_order,$column_search,$default_order,$where,$joins);
+        $this->_get_datatables_query($column,$table,$column_order,$column_search,$default_order,$where,$joins, $group);
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
