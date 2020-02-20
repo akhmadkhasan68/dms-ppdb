@@ -21,23 +21,23 @@
                         <h5 class="card-title">Pengumuman</h5>
                         <br>
                         <label for="exampleEmail11" class="text text-info"><b>Masukkan NISN untuk melihat status pendaftaran anda</b> </label>
-                        <form class="" style="margin-top: 10px">
+                        <div class="" style="margin-top: 10px">
                             <div class="form-row">
                                 <div class="col-md-12">
-                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">NISN</label><input name="nama_lengkap" id="nama_lengkap" placeholder="" type="text" class="form-control"></div>
+                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">NISN</label><input name="nisn" id="nisn" placeholder="" type="number" class="form-control"></div>
                                 </div>
                             </div>
                             <div style="text-align: right">
-                                <button class="btn btn-primary btn-lg">Cari Data Saya
+                                <button class="btn btn-primary btn-lg" onclick="ajax_cek_siswa()">Cari Data Saya
                                 </button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" id="view_hasil" style="display: none">
             <div class="col-lg-12">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
@@ -64,7 +64,7 @@
                                                     Nama Siswa
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    SEPTIA PUTRI PERTMAI
+                                                    <p id="nama"></p>
                                                 </div>
                                             </div>
                                             <div class="row" style="padding: 10px">
@@ -72,15 +72,15 @@
                                                     NISN
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    21321932173
+                                                    <p id="txt_nisn"></p>
                                                 </div>
                                             </div>
                                             <div class="row" style="padding: 10px">
                                                 <div class="col-sm-3">
-                                                    Asal Sekolahs
+                                                    Asal Sekolah
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    MTSN 2 JEMBRANA
+                                                    <p id="nama_sekolah"></p>
                                                 </div>
                                             </div>
                                         </div>

@@ -20,10 +20,10 @@
                     <div class="card-body">
                         <h5 class="card-title">1.IDENTITAS CALON PESERTA DIDIK</h5>
                         <hr>
-                        <form class="">
+                        <form id='form' method='post' enctype='multipart/form-data' onsubmit="sendForm();return false">
                             <div class="form-row">
                                 <div class="col-md-12">
-                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Nama Lengkap</label><input name="nama_lengkap" id="nama_lengkap" placeholder="Tulis nama lengkap anda" type="text" class="form-control"></div>
+                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Nama Lengkap</label><input name="nama_siswa" id="nama_siswa" placeholder="Tulis nama lengkap anda" type="text" class="form-control"></div>
                                 </div>
                             </div>
                             <div class="form-row">
@@ -34,12 +34,12 @@
                                     <div class="position-relative form-group"><label for="exampleState" class="">Tanggal Lahir</label><input name="tanggal_lahir" id="tanggal_lahir" type="date" class="form-control"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="position-relative form-group"><label for="exampleState" class="">Kewarganegaraan</label><input name="kewarganegaraan" id="kewarganegaraan" type="text" class="form-control"></div>
+                                    <div class="position-relative form-group"><label for="exampleState" class="">Kewarganegaraan</label><input name="kewarganegaraan_siswa" id="kewarganegaraan_siswa" type="text" class="form-control"></div>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                    <div class="position-relative form-group"><label for="exampleCity" class="">Jumlah Saudara</label><input name="jumlah_saudara" id="jumlah_saudara" type="number" class="form-control"></div>
+                                    <div class="position-relative form-group"><label for="exampleCity" class="">Jumlah Saudara</label><input name="anak_bersaudara" id="anak_bersaudara" type="number" class="form-control"></div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative form-group"><label for="exampleState" class="">Anak ke berapa</label><input name="anak_ke" id="anak_ke" type="number" class="form-control"></div>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-12">
-                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Induk Siswa Nasional (NISN)</label><input name="nama_lengkap" id="nama_lengkap" type="number" class="form-control"></div>
+                                    <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Induk Siswa Nasional (NISN)</label><input name="nisn" id="nisn" type="number" class="form-control"></div>
                                 </div>
                             </div>
                         </form>
@@ -72,7 +72,11 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Ayah</label><input name="agama_ayah" id="agama_ayah" placeholder="" type="text" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Ayah</label>
+                                                <select class="form-control" id="agama_ayah" name="agama_ayah">
+                                                    <option value="Islam" selected>Islam</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -82,9 +86,21 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Pekerjaan Ayah</label><input name="pekerjaan_ayah" id="pekerjaan_ayah" placeholder="" type="text" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Pekerjaan Ayah</label>
+                                                <select class="form-control" id="pekerjaan_ayah" name="pekerjaan_ayah">
+                                                    <option value="Buruh">Buruh</option>
+                                                    <option value="Tani">Tani</option>
+                                                    <option value="Wiraswasta">Wiraswasta</option>
+                                                    <option value="PNS">PNS</option>
+                                                    <option value="Polri/TNI">Polri/TNI</option>
+                                                    <option value="Perangkat Desa">Perangkat Desa</option>
+                                                    <option value="Nelayan">Nelayan</option>
+                                                    <option value="Lainnya">Lainnya</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
+
                                     <div class="form-row">
                                         <div class="col-md-12">
                                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Alamat Ayah</label><input name="alamat_ayah" id="alamat_ayah" placeholder="" type="text" class="form-control"></div>
@@ -92,7 +108,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Telepon/HP Ayah</label><input name="no_ayah" id="no_ayah" placeholder="" type="number" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Telepon/HP Ayah</label><input name="hp_ayah" id="hp_ayah" placeholder="" type="number" class="form-control"></div>
                                         </div>
                                     </div>
 
@@ -112,17 +128,33 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Ibu</label><input name="agama_ibu" id="agama_ibu" placeholder="" type="text" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Ayah</label>
+                                                <select class="form-control" id="agama_ibu" name="agama_ibu">
+                                                    <option value="Islam" selected>Islam</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Kewarganegaraan Ibu</label><input name="kewarganegaraan_wali" id="kewarganegaraan_wali" placeholder="" type="text" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Kewarganegaraan Ibu</label><input name="kewarganegaraan_ibu" id="kewarganegaraan_ibu" placeholder="" type="text" class="form-control"></div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Pekerjaan Ibu</label><input name="pekerjaan_ibu" id="pekerjaan_ibu" placeholder="" type="text" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Pekerjaan Ibu</label>
+                                                <select class="form-control" id="pekerjaan_ibu" name="pekerjaan_ibu">
+                                                    <option value="Ibu Rumah Tangga">Ibu Rumah Tangga</option>
+                                                    <option value="Buruh">Buruh</option>
+                                                    <option value="Tani">Tani</option>
+                                                    <option value="Wiraswasta">Wiraswasta</option>
+                                                    <option value="PNS">PNS</option>
+                                                    <option value="Polri/TNI">Polri/TNI</option>
+                                                    <option value="Perangkat Desa">Perangkat Desa</option>
+                                                    <option value="Nelayan">Nelayan</option>
+                                                    <option value="Lainnya">Lainnya</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -132,7 +164,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Telepon/HP Ibu</label><input name="no_ibu" id="no_ibu" placeholder="" type="number" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Telepon/HP Ibu</label><input name="hp_ibu" id="hp_ibu" placeholder="" type="number" class="form-control"></div>
                                         </div>
                                     </div>
 
@@ -162,7 +194,11 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Wali</label><input name="agama_wali" id="agama_wali" placeholder="" type="text" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Wali</label>
+                                                <select class="form-control" id="agama_wali" name="agama_wali">
+                                                    <option value="Islam" selected>Islam</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -172,7 +208,18 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Pekerjaan Wali</label><input name="pekerjaan_wali" id="pekerjaan_wali" placeholder="" type="text" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Pekerjaan Wali</label>
+                                                <select class="form-control" id="pekerjaan_wali" name="pekerjaan_wali">
+                                                    <option value="Buruh">Buruh</option>
+                                                    <option value="Tani">Tani</option>
+                                                    <option value="Wiraswasta">Wiraswasta</option>
+                                                    <option value="PNS">PNS</option>
+                                                    <option value="Polri/TNI">Polri/TNI</option>
+                                                    <option value="Perangkat Desa">Perangkat Desa</option>
+                                                    <option value="Nelayan">Nelayan</option>
+                                                    <option value="Lainnya">Lainnya</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
@@ -182,7 +229,7 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Telepon/HP Wali</label><input name="no_wali" id="no_wali" placeholder="" type="number" class="form-control"></div>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Nomor Telepon/HP Wali</label><input name="hp_wali" id="hp_wali" placeholder="" type="number" class="form-control"></div>
                                         </div>
                                     </div>
 
@@ -191,8 +238,7 @@
 
                         </div>
                         <div style="text-align: right">
-                            <button class="btn btn-primary btn-lg">Simpan Formulir Pendaftaran
-                            </button>
+                            <input type="submit" value="Simpan Formulir Pendaftaran" class="btn btn-primary btn-lg" onclick='sendForm()'>
                         </div>
 
                     </div>

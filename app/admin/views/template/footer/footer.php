@@ -43,6 +43,7 @@
 <script src="<?php echo base_url(); ?>assets/admin/scripts/sweetalert2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/scripts/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/scripts/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/ajaxFunction.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $(".loader").fadeOut();
