@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-<?php if($this->session->userdata('id_level') == 1){echo "8";}else{echo "12";}?>">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Edit Profil</h5>
@@ -32,14 +32,18 @@
                                     <label for="validationCustom01">Username</label>
                                     <input type="text" class="form-control" name="username" id="edit_username" placeholder="" value="<?php echo $userdata->username;?>">
                                 </div>
-                                <div style="margin-top: 4px">
-                                    <label for="validationCustom01">Password Lama</label>
-                                    <input type="password" class="form-control" name="old_password" id="edit_old_password" placeholder="">
+                                <div id="edit-password" style="display:none;">
+                                    <div style="margin-top: 4px">
+                                        <label for="validationCustom01">Password Lama</label>
+                                        <input type="password" class="form-control" name="old_password" id="edit_old_password" placeholder="">
+                                    </div>
+                                    <div style="margin-top: 4px">
+                                        <label for="validationCustom01">Password Baru</label>
+                                        <input type="password" class="form-control" name="new_password" id="edit_new_password" placeholder="">
+                                    </div>
                                 </div>
-                                <div style="margin-top: 4px">
-                                    <label for="validationCustom01">Password Baru</label>
-                                    <input type="password" class="form-control" name="new_password" id="edit_new_password" placeholder="">
-                                </div>
+                                <br>
+                                <input type="checkbox" id="edit-password-trigger"> Edit Password?
                             </div>
                             <div style="text-align:right;margin-top: 10px">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -48,6 +52,7 @@
                     </div>
                 </div>
             </div>
+            <?php if($this->session->userdata('id_level') == 1){?>
             <div class="col-lg-4">
                 <div class="main-card mb-3 card">
                     <div class="card-body">
@@ -90,6 +95,7 @@
                     </div>
                 </div>
             </div>
+            <?php } ?>
         </div>
     </div>
 </div>

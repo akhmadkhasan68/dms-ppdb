@@ -10,7 +10,7 @@
             var data = $(this).serialize();
 
             $.ajax({
-                url: '<?php echo site_url('dokumen/ajax_action_send_doc');?>',
+                url: '<?php echo site_url('share/ajax_action_send_doc');?>',
                 type: 'POST',
                 dataType: 'JSON',
                 data: data,

@@ -80,7 +80,8 @@ class Pengaturan extends MY_Controller
 		{
 			$data = [
 				'name' => $name,
-				'username' => $username
+				'username' => $username,
+				'updated_at' => date('Y-m-d H:i:s')
 			];
 
 			//UPDATE USERDATA
@@ -101,7 +102,7 @@ class Pengaturan extends MY_Controller
 			if(md5($old_password) != $userdata->password)
 			{
 				$json_data = [
-					'result' => TRUE,
+					'result' => FALSE,
 					'form_error' => '',
 					'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, password lama tidak sesuai!'],
 					'redirect' => ''

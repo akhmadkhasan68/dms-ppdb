@@ -155,7 +155,8 @@ class Pengguna extends MY_Controller
 			'id_level' => $id_level,
 			'name' => $name,
 			'username' => $username,
-			'password' => $password
+			'password' => $password,
+			'created_at' => date('Y-m-d H:i:s')
 		];
 
 		$insert_data = $this->M_pengguna->insert_table("admin", $data);
@@ -232,14 +233,16 @@ class Pengguna extends MY_Controller
 			$data = [
 				'name' => $name,
 				'username' => $username,
-				'id_level' => $level
+				'id_level' => $level,
+				'updated_at' => date('Y-m-d H:i:s')
 			];
 		}else{
 			$data = [
 				'name' => $name,
 				'username' => $username,
 				'password' => $password,
-				'id_level' => $level
+				'id_level' => $level,
+				'updated_at' => date('Y-m-d H:i:s')
 			];
 		}
 

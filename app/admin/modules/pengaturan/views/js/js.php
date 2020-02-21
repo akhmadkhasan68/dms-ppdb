@@ -69,6 +69,16 @@
                 }
             });
         });
+
+        $("#edit-password-trigger").change(function(){
+            if($(this).is(':checked'))
+            {
+                $("#edit-password").css('display', 'block');
+            }else
+            {
+                $("#edit-password").css('display', 'none');
+            }
+        });
     });
 </script>
 

@@ -32,11 +32,11 @@ class Dokumen extends MY_Controller
 	{		
 		//SET VALIDATION
 		$this->form_validation->set_rules('name', 'name', 'required');
+		$this->form_validation->set_rules('is_approval', 'is_approval', 'required');
 		if (empty($_FILES['file']['name']))
 		{
 			$this->form_validation->set_rules('file', 'file', 'required');
 		}
-		$this->form_validation->set_rules('is_approval', 'is_approval', 'required');
 
 		//CHECK VALIDATION IS RUN OR NOT
 		if($this->form_validation->run() == FALSE)
@@ -63,14 +63,23 @@ class Dokumen extends MY_Controller
 
 		//GENERATE RAND STRING
 		$permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-    	$kode = substr(str_shuffle($permitted_chars), 0, 10);
+		$kode = substr(str_shuffle($permitted_chars), 0, 10);
+		
+		//SET FILE NAME
+		$filename = $_FILES["file"]['name'];
+		$explode_filename = explode(".", $filename);
+		$file_extension = end($explode_filename);
+		$file_noextension = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
+
+		$file_name = $file_noextension."_".$kode.".".$file_extension;
+
 
 		//SET CONFIG UPLOAD 
 		$config = [
 			'upload_path' => $upload_path, //upload path to save the document
-			'allowed_types' => "gif|jpg|jpeg|png|doc|docx|xlsx|csv|xls",
-			'file_name' => $kode."_".$_FILES["file"]['name'] //allowed extension file
-			// 'encrypt_name' => TRUE
+			'allowed_types' => "*",
+			'file_name' =>  $file_name,
+			'max_size' => '5000'
 		];
 		
 		//CHECK DIRECTORY IS EXIST.
@@ -79,6 +88,23 @@ class Dokumen extends MY_Controller
 		}
 
 		$this->load->library('upload', $config); //load library upload
+
+		if(!$this->upload->do_upload("file"))
+		{	
+			$message = $this->upload->display_errors();
+			$message = trim($message,"<p></p>");
+
+			$json_data = [
+				'result' => false,
+				'form_error' => '',
+				'message' => ['head' => 'Gagal', 'body' => $message],
+				'redirect' => ''
+			];
+
+			print json_encode($json_data);
+
+			die();
+		}
 
 		//UPLOAD DOC
 		if($this->upload->do_upload("file"))
@@ -199,6 +225,133 @@ class Dokumen extends MY_Controller
 		}
 	}
 
+	public function ajax_action_edit_doc()
+	{
+		//GET ID USER FROM SESSION
+		$id_user = $this->session->userdata('id');
+
+		//DECLARE POST DATA
+		$id = $this->input->post('id');
+		$name = $this->input->post('name');
+		
+		$this->form_validation->set_rules('name', 'name', 'required');
+
+		if($this->form_validation->run() == FALSE)
+		{
+			$error = $this->form_validation->error_array();
+
+			$json_data = [
+				'result' => false,
+				'form_error' => $error,
+				'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+				'redirect' => ''
+			];
+
+			print json_encode($json_data);
+			die();
+		}
+
+		if(empty($_FILES['file']['name']))
+		{
+			$data = [
+				'name' => $name,
+				'updated_at' => date('Y-m-d H:i:s')
+			];
+
+			$update_data = $this->M_dokumen->update_table2("document",$data,"id = $id");
+
+			$json_data = [
+				'result' => true,
+				'form_error' => '',
+				'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil merubah data dokumen!'],
+				'redirect' => $this->config->item('index_page').'dokumen'
+			];
+
+			print json_encode($json_data);
+		}
+		else
+		{
+			//SET UPLOAD PATH
+			$upload_path = "./uploads/document/$id_user";
+
+			//GENERATE RAND STRING
+			$permitted_chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+			$kode = substr(str_shuffle($permitted_chars), 0, 10);
+			
+			//SET FILE NAME
+			$filename = $_FILES["file"]['name'];
+			$explode_filename = explode(".", $filename);
+			$file_extension = end($explode_filename);
+			$file_noextension = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
+
+			$file_name = $file_noextension."_".$kode.".".$file_extension;
+
+
+			//SET CONFIG UPLOAD 
+			$config = [
+				'upload_path' => $upload_path, //upload path to save the document
+				'allowed_types' => "*",
+				'file_name' =>  $file_name,
+				'max_size' => '5000'
+			];
+			
+			//CHECK DIRECTORY IS EXIST.
+			if (!is_dir($upload_path)) {
+				mkdir($upload_path, 0777, TRUE);
+			}
+
+			$this->load->library('upload', $config); //load library upload
+
+			if(!$this->upload->do_upload("file"))
+			{	
+				$message = $this->upload->display_errors();
+				$message = trim($message,"<p></p>");
+
+				$json_data = [
+					'result' => false,
+					'form_error' => '',
+					'message' => ['head' => 'Gagal', 'body' => $message],
+					'redirect' => ''
+				];
+
+				print json_encode($json_data);
+
+				die();
+			}
+
+			if($this->upload->do_upload("file"))
+			{
+				$data = [
+					'name' => $name,
+					'file' => $this->upload->data('file_name'),
+					'updated_at' => date('Y-m-d H:i:s')
+				];
+
+				$update_data = $this->M_dokumen->update_table2("document",$data,"id = $id");
+
+				$json_data = [
+					'result' => true,
+					'form_error' => '',
+					'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil merubah data dokumen!'],
+					'redirect' => $this->config->item('index_page').'dokumen'
+				];
+
+				print json_encode($json_data);
+			}
+			else
+			{
+				$error = array('error' => $this->upload->display_errors());
+				$data = [
+
+					'message' => 'error',
+					'error' => $error
+				];
+
+				print json_encode($data);
+			}
+		}
+	}
+
 	public function ajax_action_send_doc()
 	{	
 		//ID USER FROM SESSION
@@ -233,15 +386,19 @@ class Dokumen extends MY_Controller
 		}
 
 		//SET PATH FROM COPY FILE
-		$upload_path_from = "./uploads/document/$id_user";
+		$upload_path_from = "./uploads/document/$id_user/$file";
+		$file_upload = read_file($upload_path_from);
 
 		for($i = 0; $i < count($send_to); $i++)
 		{
 			$id_admin = $send_to[$i];
 			$upload_path_to = "./uploads/document/$id_admin";
-			
-			//COPY FILE
-			//directory_copy($upload_path_from.'/'.$file, $upload_path_to.'/'.$file);
+
+			if (!is_dir($upload_path_to)) {
+				mkdir($upload_path_to, 0777, TRUE);
+			}
+
+			write_file($upload_path_to."/$file", $file_upload);
 
 			$data = [
 				'id_admin' => $id_admin,
@@ -272,9 +429,35 @@ class Dokumen extends MY_Controller
 
 		$data = $this->M_dokumen->get_row("*","document","id = $id");
 
+		$joins = [
+			[
+				'table' => 'admin a',
+				'condition' => 'a.id = d.id_admin',
+				'jointype' => 'left'
+			],
+			[
+				'table' => 'level l',
+				'condition' => 'l.id_level = a.id_level',
+				'jointype' => 'left'
+			]
+		];
+		$data_approval = $this->M_dokumen->fetch_joins("document_approval d", "d.status, a.name, a.username, l.name as level", $joins,"d.id_document = $id");
+
+		$nama_admin = [];
+		$username = [];
+		$level = [];
+		foreach($data_approval as $approval){
+			array_push($nama_admin, $approval->name);
+			array_push($username, $approval->username);
+			array_push($level, $approval->level);
+		}	
+
 		$json_data = [
 			'result' => TRUE,
-			'data' => $data
+			'data' => $data,
+			'nama_admin_approval' => $nama_admin,
+			'username_approval' => $username,
+			'level_approval' => $level,
 		];
 
 		print json_encode($json_data);
@@ -286,7 +469,7 @@ class Dokumen extends MY_Controller
 		$column_order = array('a.id', 'a.name', 'a.file', 'a.is_approval', 'd.status');
 		$column_search = array('a.id', 'a.name', 'a.file', 'a.is_approval', 'd.status');
 		$order = array('a.id' => 'DESC');
-		$where = "a.id_admin = ".$this->session->userdata('id');
+		$where = "a.id_admin = ".$this->session->userdata('id')." AND a.is_shared IS NULL";
 		$group = "d.id_document";
 		$table = "document a";
 		$joins = [
@@ -334,7 +517,7 @@ class Dokumen extends MY_Controller
 			}
 			
 			$row[] = '
-				<label><button class="mb-2 mr-2 btn btn-primary" data-toggle="modal" data-target="#modal_edit_dokument"><i class="fa fa-pen"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-primary" onclick="editFile('.$key->id.')"><i class="fa fa-pen"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')"><i class="fa fa-paper-plane"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')"><i class="fa fa-trash"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()"><i class="fa fa-download"></i></button></label>

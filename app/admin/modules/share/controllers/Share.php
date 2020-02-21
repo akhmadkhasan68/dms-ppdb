@@ -7,7 +7,8 @@ class Share extends MY_Controller
 	public function __construct()
 	{
 		$this->load->model('M_share');
-		$this->load->helper('common');
+		$this->load->helper(array('common', 'file'));
+		$this->load->library('form_validation');
 
 		if($this->session->userdata('logged_in') == FALSE)
 		{
@@ -33,7 +34,7 @@ class Share extends MY_Controller
 		$column_order = array('a.id', 'a.name', 'd.name');
 		$column_search = array('a.id', 'a.name', 'd.name');
 		$order = array('a.id' => 'DESC');
-		$where = "a.id_admin = ".$this->session->userdata('id')." AND is_shared = 1";
+		$where = "a.id_admin = ".$this->session->userdata('id')." AND a.is_shared IS NOT NULL";
 		$group = "";
 		$table = "document a";
 		$joins = [
@@ -75,5 +76,76 @@ class Share extends MY_Controller
 			"data" => $data,
 		);
 		echo json_encode($output);
+	}
+
+	public function ajax_action_send_doc()
+	{	
+		//ID USER FROM SESSION
+		$id_user = $this->session->userdata('id');
+
+		//DECLARE POST DATA
+		$id = $this->input->post('id');
+		$is_approval = $this->input->post('is_approval');
+		$name = $this->input->post('name');
+		$file = $this->input->post('file');
+		$send_to = $this->input->post('send_to');
+
+		//SET VALIDATION
+		$this->form_validation->set_rules('name', 'name', 'required');
+		$this->form_validation->set_rules('file', 'file', 'required');
+		$this->form_validation->set_rules('send_to[]', 'send_to', 'required');
+
+		//IF VALIDATION RUN
+		if($this->form_validation->run() == FALSE)
+		{
+			$error = $this->form_validation->error_array();
+
+			$json_data = [
+				'result' => FALSE,
+				'form_error' => $error,
+				'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+				'redirect' => ''
+			];
+
+			print json_encode($json_data);
+			die();
+		}
+
+		//SET PATH FROM COPY FILE
+		$upload_path_from = "./uploads/document/$id_user/$file";
+		$file_upload = read_file($upload_path_from);
+
+		for($i = 0; $i < count($send_to); $i++)
+		{
+			$id_admin = $send_to[$i];
+			$upload_path_to = "./uploads/document/$id_admin";
+
+			if (!is_dir($upload_path_to)) {
+				mkdir($upload_path_to, 0777, TRUE);
+			}
+
+			write_file($upload_path_to."/$file", $file_upload);
+
+			$data = [
+				'id_admin' => $id_admin,
+				'name' => $name,
+				'file' => $file,
+				'is_approval' => $is_approval,
+				'is_shared' => '1',
+				'shared_by' => $id_user,
+				'created_at' => date('Y-m-d H:i:s')
+			];
+			
+			$insert_table = $this->M_share->insert_table("document",$data);
+		}
+
+		$json_data = [
+			'result' => TRUE,
+			'form_error' => '',
+			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, dokumen berhasil dikirim'],
+			'redirect' => $this->config->item('index_page').'share'
+		];
+
+		print json_encode($json_data);
 	}
 }

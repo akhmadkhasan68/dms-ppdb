@@ -30,10 +30,10 @@ class Approval extends MY_Controller
 	public function ajax_list_approval()
 	{
 		$column = "a.id, a.status, a.id_document, d.name, d.file, d.is_approval, d.is_shared, d.shared_by, u.name as name_admin, u.username, l.name as level";
-		$column_order = array('a.id', 'd.name');
-		$column_search = array('a.id', 'd.name');
-		$order = array('a.id' => 'DESC');
-		$where = "a.id_admin = ".$this->session->userdata('id');
+		$column_order = array('a.id', 'd.name', 'd.file', 'u.name', 'a.status');
+		$column_search = array('a.id', 'd.name', 'd.file', 'u.name', 'a.status');
+		$order = "";
+		$where = "a.id_admin = ".$this->session->userdata('id')." AND d.is_approval = '1'";
 		$group = "";
 		$table = "document_approval a";
 		$joins = [
@@ -44,7 +44,7 @@ class Approval extends MY_Controller
 			],
 			[
 				"table" => "admin u",
-				"condition" => "u.id = a.id_admin",
+				"condition" => "u.id = d.id_admin",
 				"jointype" => "right"
 			],
 			[
@@ -83,11 +83,19 @@ class Approval extends MY_Controller
 				$row[] = '<div class="badge badge-info">Tidak Membutuhkan Approval</div>';
 			}
 
-			$row[] = '
-				<label><button class="mb-2 mr-2 btn btn-success" onclick="terima('.$key->id.')"><i class="fa fa-check"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-danger" onclick="tolak('.$key->id.')"><i class="fa fa-window-close"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
-			';
+			if($key->status != "BELUM")
+			{
+				$row[] = '
+					<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
+				';
+			}else{
+				$row[] = '
+					<label><button class="mb-2 mr-2 btn btn-success" onclick="terima('.$key->id.')"><i class="fa fa-check"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-danger" onclick="tolak('.$key->id.')"><i class="fa fa-window-close"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
+				';
+			}
+
 			$data[] = $row;
 		}
 
@@ -106,7 +114,8 @@ class Approval extends MY_Controller
 		$status = $this->input->post('status');
 
 		$data = [
-			'status' => $status
+			'status' => $status,
+			'updated_at' => date('Y-m-d H:i:s')
 		];
 
 		$update_data = $this->M_approval->update_table2("document_approval",$data,"id = $id");
