@@ -73,7 +73,7 @@ class Pengguna extends MY_Controller
 				';
 			}else{
 				$action = '
-					<label><button class="mb-2 mr-2 btn btn-warning" onclick="activeUser('.$key->id.', 0)">Nonktifkan User</button></label>
+					<label><button class="mb-2 mr-2 btn btn-warning" onclick="activeUser('.$key->id.', 0)">Nonaktifkan User</button></label>
 					<label><button class="mb-2 mr-2 btn btn-info" onclick="editUser('.$key->id.')">Edit</button></label>
 					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')">Hapus</button></label>
 				';
@@ -302,7 +302,7 @@ class Pengguna extends MY_Controller
 		$json_data = [
 			'result' => TRUE,
 			'form_error' => "",
-			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil mengaktifkan user!'],
+			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil mengubah status user!'],
 			'redirect' => $this->config->item('index_page').'pengguna'
 		];
 

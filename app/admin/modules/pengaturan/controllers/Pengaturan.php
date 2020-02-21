@@ -76,7 +76,7 @@ class Pengaturan extends MY_Controller
 		}
 
 		//JIKA TIDAK GANTI PASSWORD
-		if($new_password == "" || $old_password == "")
+		if($new_password == "" && $old_password == "")
 		{
 			$data = [
 				'name' => $name,

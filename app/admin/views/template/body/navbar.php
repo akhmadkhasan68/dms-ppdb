@@ -60,15 +60,15 @@
                             </div>
                             <div class="widget-content-left  ml-3 header-user-info">
                                 <div class="" style="color: white">
-                                    <?php echo $this->session->userdata('username');?>
+                                    <?php echo $this->session->userdata('username'); ?>
                                 </div>
                                 <div class="widget-subheading">
-                                    <?php echo $this->session->userdata('level');?>
+                                    <?php echo $this->session->userdata('level'); ?>
                                 </div>
                             </div>
                             <div class="widget-content-right header-user-info ml-3">
-                                <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example" id="logout">
-                                    <i class="fa text-white fa-arrow-right pr-1 pl-1"></i>
+                                <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm " id="logout">
+                                    <i class="fa fa-arrow-right text-white pr-1 pl-1"></i>
                                 </button>
                             </div>
                         </div>
@@ -79,24 +79,38 @@
     </div>
 
     <script>
-        $("#logout").click(function(){
-            $.ajax({
-                url: '<?php echo site_url('Logout/ajax_action_logout')?>',
-                type: 'POST',
-                data: {
-                    <?php echo $this->security->get_csrf_token_name();?>: '<?php echo $this->security->get_csrf_hash();?>'
-                },
-                beforeSend: function(){
-                    $(".loader").show();
-                },
-                success: function(){
-                    $(".loader").hide();
-                    message("Selamat", "Anda telah logout", "success", "info", 1000);
-                    window.location.href = "<?php echo base_url() . index_page(); ?>login";
-                },
-                error: function(){
-                    alert("Error Data");
+        $("#logout").click(function() {
+            Swal.fire({
+                title: 'Apakah anda ingin keluar ?',
+                text: "Anda akan keluar website ini",
+                type: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#f5365c',
+                confirmButtonText: 'Ya, Keluar'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '<?php echo site_url('Logout/ajax_action_logout') ?>',
+                        type: 'POST',
+                        data: {
+                            <?php echo $this->security->get_csrf_token_name(); ?>: '<?php echo $this->security->get_csrf_hash(); ?>'
+                        },
+                        beforeSend: function() {
+                            $(".loader").show();
+                        },
+                        success: function() {
+                            $(".loader").hide();
+                            message("Selamat", "Anda telah logout", "success", "info", 1000);
+                            window.location.href = "<?php echo base_url() . index_page(); ?>login";
+                        },
+                        error: function() {
+                            alert("Error Data");
+                        }
+                    });
                 }
-            });
+            })
+
+
         });
     </script>

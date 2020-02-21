@@ -10,8 +10,7 @@ class Dokumen extends MY_Controller
 		$this->load->helper(array('common', 'file'));
 		$this->load->library('form_validation');
 
-		if($this->session->userdata('logged_in') == FALSE)
-		{
+		if ($this->session->userdata('logged_in') == FALSE) {
 			redirect('login');
 		}
 	}
@@ -29,7 +28,7 @@ class Dokumen extends MY_Controller
 	}
 
 	public function ajax_action_add_file()
-	{		
+	{
 		//SET VALIDATION
 		$this->form_validation->set_rules('name', 'name', 'required');
 		$this->form_validation->set_rules('is_approval', 'is_approval', 'required');
@@ -39,8 +38,7 @@ class Dokumen extends MY_Controller
 		}
 
 		//CHECK VALIDATION IS RUN OR NOT
-		if($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			$error = $this->form_validation->error_array();
 
 			$json_data = [
@@ -81,7 +79,7 @@ class Dokumen extends MY_Controller
 			'file_name' =>  $file_name,
 			'max_size' => '5000'
 		];
-		
+
 		//CHECK DIRECTORY IS EXIST.
 		if (!is_dir($upload_path)) {
 			mkdir($upload_path, 0777, TRUE);
@@ -107,8 +105,7 @@ class Dokumen extends MY_Controller
 		}
 
 		//UPLOAD DOC
-		if($this->upload->do_upload("file"))
-		{ 
+		if ($this->upload->do_upload("file")) {
 			$data = [
 				'id_admin' => $id_user,
 				'name' => $this->input->post('name'),
@@ -120,14 +117,12 @@ class Dokumen extends MY_Controller
 			$id_admin_approval = $this->input->post('id_admin_approval');
 
 			//IF CONDITITION DOCUMENT IS NEED APPROVAL
-			if($data['is_approval'] == 1)
-			{
+			if ($data['is_approval'] == 1) {
 				//INSERT TO DOC TABLE
 				$insert_doc = $this->M_dokumen->insert_table("document", $data);
 
 				//CHECK INSERT DOC IS FAILED
-				if($insert_doc == FALSE)
-				{
+				if ($insert_doc == FALSE) {
 					$json_data = [
 						'result' => FALSE,
 						'form_error' => '',
@@ -139,28 +134,27 @@ class Dokumen extends MY_Controller
 
 					die();
 				}
-				
+
 				//GENERATE LAST INSERT 
 				$last_id_doc = $this->db->insert_id();
 
 				//COUNT USER APPROVAL
 				$count_user = count($id_admin_approval);
 
-				for($i = 0; $i < $count_user; $i++){
+				for ($i = 0; $i < $count_user; $i++) {
 					//SET DATA INSERT TO DOCUMENT APPROVAL
 					$doc_approval = [
 						'id_document' => $last_id_doc,
 						'id_admin' => $id_admin_approval[$i],
 						'created_at' => date('Y-m-d H:i:s')
 					];
-	
+
 					//INSERT TO DOC APPROVAL TABLE
 					$insert_doc_approval = $this->M_dokumen->insert_table("document_approval", $doc_approval);
 				}
 
 				//CHECK INSERT DOC IS FAILED
-				if($insert_doc_approval == FALSE)
-				{
+				if ($insert_doc_approval == FALSE) {
 					$json_data = [
 						'result' => FALSE,
 						'form_error' => '',
@@ -178,19 +172,16 @@ class Dokumen extends MY_Controller
 					'result' => TRUE,
 					'form_error' => '',
 					'message' => ['head' => 'Berhasil', 'body' => 'Selamat, Anda berhasil menambahkan data dokumen!'],
-					'redirect' => $this->config->item('index_page').'dokumen'
+					'redirect' => $this->config->item('index_page') . 'dokumen'
 				];
 
 				print json_encode($json_data);
-			}
-			else
-			{
+			} else {
 				//INSERT TO DOC TABLE
 				$insert_doc = $this->M_dokumen->insert_table("document", $data);
 
 				//CHECK INSERT DOC IS FAILED
-				if($insert_doc == FALSE)
-				{
+				if ($insert_doc == FALSE) {
 					$json_data = [
 						'result' => FALSE,
 						'form_error' => '',
@@ -208,12 +199,12 @@ class Dokumen extends MY_Controller
 					'result' => TRUE,
 					'form_error' => '',
 					'message' => ['head' => 'Berhasil', 'body' => 'Selamat, Anda berhasil menambahkan data dokumen!'],
-					'redirect' => $this->config->item('index_page').'dokumen'
+					'redirect' => $this->config->item('index_page') . 'dokumen'
 				];
 
 				print json_encode($json_data);
 			}
-		}else{
+		} else {
 			$error = array('error' => $this->upload->display_errors());
 			$data = [
 
@@ -353,7 +344,7 @@ class Dokumen extends MY_Controller
 	}
 
 	public function ajax_action_send_doc()
-	{	
+	{
 		//ID USER FROM SESSION
 		$id_user = $this->session->userdata('id');
 
@@ -370,8 +361,7 @@ class Dokumen extends MY_Controller
 		$this->form_validation->set_rules('send_to[]', 'send_to', 'required');
 
 		//IF VALIDATION RUN
-		if($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			$error = $this->form_validation->error_array();
 
 			$json_data = [
@@ -389,8 +379,7 @@ class Dokumen extends MY_Controller
 		$upload_path_from = "./uploads/document/$id_user/$file";
 		$file_upload = read_file($upload_path_from);
 
-		for($i = 0; $i < count($send_to); $i++)
-		{
+		for ($i = 0; $i < count($send_to); $i++) {
 			$id_admin = $send_to[$i];
 			$upload_path_to = "./uploads/document/$id_admin";
 
@@ -409,15 +398,15 @@ class Dokumen extends MY_Controller
 				'shared_by' => $id_user,
 				'created_at' => date('Y-m-d H:i:s')
 			];
-			
-			$insert_table = $this->M_dokumen->insert_table("document",$data);
+
+			$insert_table = $this->M_dokumen->insert_table("document", $data);
 		}
 
 		$json_data = [
 			'result' => TRUE,
 			'form_error' => '',
 			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, dokumen berhasil dikirim'],
-			'redirect' => $this->config->item('index_page').'dokumen'
+			'redirect' => $this->config->item('index_page') . 'dokumen'
 		];
 
 		print json_encode($json_data);
@@ -427,7 +416,7 @@ class Dokumen extends MY_Controller
 	{
 		$id = $this->input->get('id');
 
-		$data = $this->M_dokumen->get_row("*","document","id = $id");
+		$data = $this->M_dokumen->get_row("*", "document", "id = $id", "", "", FALSE);
 
 		$joins = [
 			[
@@ -469,7 +458,11 @@ class Dokumen extends MY_Controller
 		$column_order = array('a.id', 'a.name', 'a.file', 'a.is_approval', 'd.status');
 		$column_search = array('a.id', 'a.name', 'a.file', 'a.is_approval', 'd.status');
 		$order = array('a.id' => 'DESC');
+<<<<<<< HEAD
 		$where = "a.id_admin = ".$this->session->userdata('id')." AND a.is_shared IS NULL";
+=======
+		$where = "a.id_admin = " . $this->session->userdata('id');
+>>>>>>> 6331af24bbf3da6293f9a809a62bdb95c7f8f825
 		$group = "d.id_document";
 		$table = "document a";
 		$joins = [
@@ -483,7 +476,7 @@ class Dokumen extends MY_Controller
 		$list = $this->M_dokumen->get_datatables($column, $table, $column_order, $column_search, $order, $where, $joins, $group);
 
 		$data = array();
-		$no = $_POST['start']+1;
+		$no = $_POST['start'] + 1;
 
 		foreach ($list as $key) {
 			$row = array();
@@ -491,31 +484,22 @@ class Dokumen extends MY_Controller
 			$row[] = $key->name;
 			$row[] = $key->file;
 
-			if($key->is_approval == 1)
-			{
+			if ($key->is_approval == 1) {
 				$row[] = '<div class="badge badge-success">Ya</div>';
-			}else
-			{
+			} else {
 				$row[] = '<div class="badge badge-danger">Tidak</div>';
 			}
 
-			if($key->status == "BELUM")
-			{
-				$row[] = '<div style="cursor:pointer;" class="badge badge-warning" onclick="showApproval('.$key->id.')" >Menunggu Approval</div>';
-			}
-			elseif($key->status == "DITERIMA")
-			{
+			if ($key->status == "BELUM") {
+				$row[] = '<div style="cursor:pointer;" class="badge badge-warning" onclick="showApproval(' . $key->id . ')" >Menunggu Approval</div>';
+			} elseif ($key->status == "DITERIMA") {
 				$row[] = "<div class='badge badge-success'>Approval Diterima</div>";
-			}
-			elseif($key->status == "DITOLAK")
-			{
+			} elseif ($key->status == "DITOLAK") {
 				$row[] = "<div class='badge badge-danger'>Approval Ditolak</div>";
-			}
-			else
-			{
+			} else {
 				$row[] = '<div class="badge badge-info">Tidak Membutuhkan Approval</div>';
 			}
-			
+
 			$row[] = '
 				<label><button class="mb-2 mr-2 btn btn-primary" onclick="editFile('.$key->id.')"><i class="fa fa-pen"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')"><i class="fa fa-paper-plane"></i></button></label>
@@ -560,7 +544,7 @@ class Dokumen extends MY_Controller
 			]
 		];
 
-		$get_row = $this->M_dokumen->fetch_joins($table, $columns, $joins,$where,$return_array);
+		$get_row = $this->M_dokumen->fetch_joins($table, $columns, $joins, $where, $return_array);
 
 		$json_data = [
 			'result' => TRUE,
@@ -574,17 +558,16 @@ class Dokumen extends MY_Controller
 	{
 		$id = $this->input->post('id');
 
-		$delete_document = $this->M_dokumen->delete_table("document","id",$id);
-		$delete_document_approval = $this->M_dokumen->delete_table("document_approval","id_document",$id);
+		$delete_document = $this->M_dokumen->delete_table("document", "id", $id);
+		$delete_document_approval = $this->M_dokumen->delete_table("document_approval", "id_document", $id);
 
 		//SELECT FILE
-		$select_data = $this->M_dokumen->get_row("*","document","id = $id");
+		$select_data = $this->M_dokumen->get_row("*", "document", "id = $id");
 		//DELETE FILE
 		$path_file = "./uploads/document/$id_user/$select_data->file";
 		delete_files($path_file);
 
-		if($delete_document == FALSE && $delete_document_approval == FALSE)
-		{
+		if ($delete_document == FALSE && $delete_document_approval == FALSE) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => "",
@@ -600,7 +583,7 @@ class Dokumen extends MY_Controller
 			'result' => TRUE,
 			'form_error' => "",
 			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil menghapus dokumen!'],
-			'redirect' => $this->config->item('index_page').'dokumen'
+			'redirect' => $this->config->item('index_page') . 'dokumen'
 		];
 
 		print json_encode($json_data);

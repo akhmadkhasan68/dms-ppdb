@@ -23,7 +23,7 @@
 
                     <div class="col-md-12 mb-12" style="margin-top: 5px">
                         <label for="validationCustom01">Password</label>
-                        <input type="password" class="form-control" id="password-edit" name="password" placeholder="">
+                        <input type="password" class="form-control" id="password-edit" name="password" placeholder="Kosongi jika tidak ingin mengganti password">
                     </div>
 
 
