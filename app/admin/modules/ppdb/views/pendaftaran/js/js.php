@@ -30,3 +30,25 @@
         addItemSerialize("<?php echo base_url() . $this->config->item('index_page'); ?>/ppdb/ajax_add_pendaftar/", "POST", form_data);
     }
 </script>
+
+<script>
+    $(document).ready(function() {
+        if ("<?php echo $config->ppdb_status; ?>" == "1") {
+            $('#div_pendaftaran').show();
+        } else {
+            Swal.fire({
+                title: 'Mohon Maaf',
+                text: "Pendafataran saat ini telah di tutup",
+                type: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#f5365c',
+                confirmButtonText: 'Ya, Terimakasih'
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = "<?php echo base_url() . $this->config->item('index_page'); ?>/ppdb";
+                }
+            })
+        }
+    });
+</script>

@@ -75,12 +75,13 @@
                                                     <p id="txt_nisn"></p>
                                                 </div>
                                             </div>
-                                            <div class="row" style="padding: 10px">
+                                            <div class="row" style="padding: 10px;">
                                                 <div class="col-sm-3">
-                                                    Asal Sekolah
+                                                    Bukti Pendaftaran
                                                 </div>
                                                 <div class="col-sm-9">
-                                                    <p id="nama_sekolah"></p>
+                                                    <p style="display: none" id="nama_sekolah"></p>
+                                                    <button id="cetak_bukti" class="btn btn-primary" onclick="cetak_bukti()">Cetak Bukti</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,9 +102,11 @@
                                         <div>
                                             <hr>
                                             <div class="row" style="padding: 10px">
-                                                <div class="alert alert-warning fade show" role="alert" style="width: 100%;margin-top: 15px">
+                                                <div class="fade show" id="div_status_pendaftaran" role="alert" style="width: 100%;margin-top: 15px">
                                                     <center>
-                                                        <h2>Menunggu Diverifikasi</h2>
+                                                        <h2>
+                                                            <p id="status_pendaftaran"></p>
+                                                        </h2>
                                                     </center>
 
                                                 </div>

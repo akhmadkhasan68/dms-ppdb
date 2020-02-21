@@ -6,13 +6,17 @@ class Ppdb extends MY_Controller
 
 	public function __construct()
 	{
+		$this->load->helper('common');
+		$this->load->library(array('form_validation', 'session'));
 		$this->load->model('M_ppdb');
 	}
 
 	public function index()
 	{
+
 		$data['content'] = 'dashboard/dashboard';
 		$data['active'] = 'dashboard';
+		$data['config'] = config_table();
 		$this->load->view('templatetwo', $data);
 	}
 
@@ -20,6 +24,7 @@ class Ppdb extends MY_Controller
 	{
 		$data['content'] = 'pendaftaran/pendaftaran';
 		$data['active'] = 'pendaftaran';
+		$data['config'] = config_table();
 		$this->load->view('templatetwo', $data);
 	}
 	public function pengumuman()
@@ -27,6 +32,11 @@ class Ppdb extends MY_Controller
 		$data['content'] = 'pengumuman/pengumuman';
 		$data['active'] = 'pengumuman';
 		$this->load->view('templatetwo', $data);
+	}
+
+	public function pengumuman_cetak()
+	{
+		$this->load->view('pengumuman/cetak_pendaftaran');
 	}
 
 	public function ajax_add_pendaftar()
@@ -111,9 +121,9 @@ class Ppdb extends MY_Controller
 			} else {
 				$json_data =  array(
 					"result" => TRUE,
-					"message" => array('head' => 'Success', 'body' => 'Sukses Mengisi data'),
+					"message" => array('head' => 'Success', 'body' => 'Selamat pendaftaran anda berhasil'),
 					"form_error" => '',
-					"redirect" => '' . base_url() . $this->config->item('index_page') . 'pendaftaran'
+					"redirect" => '' . base_url() . $this->config->item('index_page') . 'ppdb'
 				);
 				print json_encode($json_data);
 			}

@@ -1,4 +1,4 @@
-<div class="app-main__outer">
+<div class="app-main__outer" id="div_pendaftaran" style="display: none">
     <div class="app-main__inner">
         <div class="app-page-title ">
             <div class="page-title-wrapper ">

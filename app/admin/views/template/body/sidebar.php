@@ -2,7 +2,7 @@
     <div class="app-sidebar sidebar-shadow bg-dark sidebar-text-light">
         <div class="app-header__logo">
             <div class="logo-src">
-                <h5><?php echo $config->name;?></h5>
+                <h5><?php echo $config->name; ?></h5>
             </div>
             <div class="header__pane ml-auto">
                 <div>
@@ -64,7 +64,7 @@
                                                                                         echo 'class="mm-active"';
                                                                                     } ?>>
                             <i class="metismenu-icon pe-7s-check"></i>
-                            Approval Dokumen <div class="mb-2 mr-2 badge badge-pill badge-primary"><?php echo $notif_approve_doc;?></div>
+                            Approval Dokumen <div class="mb-2 mr-2 badge badge-pill badge-primary"><?php echo $notif_approve_doc; ?></div>
                         </a>
                     </li>
                     <li>
@@ -72,29 +72,35 @@
                                                                                     echo 'class="mm-active"';
                                                                                 } ?>>
                             <i class="metismenu-icon pe-7s-share"></i>
-                            Sharing Dokumen <div class="mb-2 mr-2 badge badge-pill badge-primary"><?php echo $notif_share_doc;?></div>
+                            Sharing Dokumen <div class="mb-2 mr-2 badge badge-pill badge-primary"><?php echo $notif_share_doc; ?></div>
                         </a>
                     </li>
 
                     <?php
-                        if($this->session->userdata('id_level') == 1){
+                    if ($this->session->userdata('id_level') == 1) {
                     ?>
-                    <li class="app-sidebar__heading">Pengelolalan User</li>
-                    <li>
-                        <a href="<?php echo base_url() . index_page(); ?>pendaftaran" <?php if ($active == "pendaftaran") { echo 'class="mm-active"';} ?>>
-                            <i class="metismenu-icon pe-7s-add-user"></i>Siswa Baru
-                        </a>
-                    </li>
-                    <li>
-                        <a href="<?php echo base_url() . index_page(); ?>pengguna" <?php if ($active == "pengguna") { echo 'class="mm-active"';} ?>>
-                            <i class="metismenu-icon pe-7s-user"></i>Pengguna
-                        </a>
-                    </li>
-                    <?php }?>
+                        <li class="app-sidebar__heading">Pengelolalan User</li>
+                        <li>
+                            <a href="<?php echo base_url() . index_page(); ?>pendaftaran" <?php if ($active == "pendaftaran") {
+                                                                                                echo 'class="mm-active"';
+                                                                                            } ?>>
+                                <i class="metismenu-icon pe-7s-add-user"></i>Siswa Baru
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url() . index_page(); ?>pengguna" <?php if ($active == "pengguna") {
+                                                                                            echo 'class="mm-active"';
+                                                                                        } ?>>
+                                <i class="metismenu-icon pe-7s-user"></i>Pengguna
+                            </a>
+                        </li>
+                    <?php } ?>
 
                     <li class="app-sidebar__heading">Pengaturan</li>
                     <li>
-                        <a href="<?php echo base_url() . index_page(); ?>pengaturan" <?php if ($active == "pengaturan") { echo 'class="mm-active"';} ?>>
+                        <a href="<?php echo base_url() . index_page(); ?>pengaturan" <?php if ($active == "pengaturan") {
+                                                                                            echo 'class="mm-active"';
+                                                                                        } ?>>
                             <i class="metismenu-icon pe-7s-settings"></i>Pengaturan
                         </a>
                     </li>

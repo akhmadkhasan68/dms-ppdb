@@ -13,6 +13,15 @@
                     $('#txt_nisn').html(response.data[0].nisn);
                     $('#nama').html(response.data[0].nama_siswa);
                     $('#nama_sekolah').html(response.data[0].nama_sekolah);
+                    $('#status_pendaftaran').html(response.data[0].status_pendaftaran)
+                    var status = response.data[0].status_pendaftaran;
+                    if (status == "BELUM") {
+                        $('#div_status_pendaftaran').addClass("alert alert-info");
+                    } else if (status == "DITERIMA") {
+                        $('#div_status_pendaftaran').addClass("alert alert-success");
+                    } else {
+                        $('#div_status_pendaftaran').addClass("alert alert-danger");
+                    }
                 } else {
                     message("Mohon Maaf", "Nisn tidak di temukan", "error", "info", 1000);
                     $('#view_hasil').hide(1000);
@@ -24,5 +33,23 @@
             message("Mohon Maaf", "Silahkan isi NISN", "error", "info", 1000);
         }
 
+    }
+</script>
+
+<script>
+    function cetak_bukti() {
+        Swal.fire({
+            title: 'Apakah anda ingin mencetak bukti pendafaran ini ?',
+            text: "",
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#f5365c',
+            confirmButtonText: 'Ya, Cetak Bukti Ini'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "<?php echo base_url() . $this->config->item('index_page'); ?>ppdb/pengumuman_cetak/" + $("#nisn").val();
+            }
+        })
     }
 </script>
