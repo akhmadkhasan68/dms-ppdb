@@ -458,11 +458,7 @@ class Dokumen extends MY_Controller
 		$column_order = array('a.id', 'a.name', 'a.file', 'a.is_approval', 'd.status');
 		$column_search = array('a.id', 'a.name', 'a.file', 'a.is_approval', 'd.status');
 		$order = array('a.id' => 'DESC');
-<<<<<<< HEAD
 		$where = "a.id_admin = ".$this->session->userdata('id')." AND a.is_shared IS NULL";
-=======
-		$where = "a.id_admin = " . $this->session->userdata('id');
->>>>>>> 6331af24bbf3da6293f9a809a62bdb95c7f8f825
 		$group = "d.id_document";
 		$table = "document a";
 		$joins = [
