@@ -7,7 +7,7 @@ class Dokumen extends MY_Controller
 	public function __construct()
 	{
 		$this->load->model('M_dokumen');
-		$this->load->helper(array('common', 'file'));
+		$this->load->helper(array('common', 'file', 'download'));
 		$this->load->library('form_validation');
 
 		if ($this->session->userdata('logged_in') == FALSE) {
@@ -500,7 +500,7 @@ class Dokumen extends MY_Controller
 				<label><button class="mb-2 mr-2 btn btn-primary" onclick="editFile('.$key->id.')"><i class="fa fa-pen"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')"><i class="fa fa-paper-plane"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')"><i class="fa fa-trash"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()"><i class="fa fa-download"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-success" onclick="download()"><i class="fa fa-print"></i></button></label>
 			';
 			$data[] = $row;
@@ -583,5 +583,20 @@ class Dokumen extends MY_Controller
 		];
 
 		print json_encode($json_data);
+	}
+
+	public function ajax_action_download_file($id)
+	{
+		//$id = $this->input->get('id');
+
+		$select_data = $this->M_dokumen->get_row("*", "document", "id = $id");
+
+		$id_admin = $select_data->id_admin;
+		$name = $select_data->name;
+		$file = $select_data->file;
+
+		echo $file_dir = './uploads/document/'.$id_admin.'/'.$file;
+
+		force_download($file_dir, NULL);
 	}
 }

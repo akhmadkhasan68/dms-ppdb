@@ -92,7 +92,7 @@ class Approval extends MY_Controller
 				$row[] = '
 					<label><button class="mb-2 mr-2 btn btn-success" onclick="terima('.$key->id.')"><i class="fa fa-check"></i></button></label>
 					<label><button class="mb-2 mr-2 btn btn-danger" onclick="tolak('.$key->id.')"><i class="fa fa-window-close"></i></button></label>
-					<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id_document.')"><i class="fa fa-download"></i></button></label>
 				';
 			}
 

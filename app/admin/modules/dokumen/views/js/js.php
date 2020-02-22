@@ -104,7 +104,7 @@
     });
 </script>
 <script>
-    function download() {
+    function download(id) {
         Swal.fire({
             title: 'Unduh Dokumen Ini !',
             text: "Apakah anda ingin mengunduh dokumen ini",
@@ -114,7 +114,11 @@
             cancelButtonColor: '#f5365c',
             confirmButtonText: 'Ya, Unduh Dokumen Ini'
         }).then((result) => {
-            if (result.value) {}
+            if (result.value) {
+                var base_url = '<?php echo base_url()?>';
+                var link = base_url + 'dokumen/ajax_action_download_file/' + id;
+                location.href = link;
+            }
         })
     }
 
@@ -164,7 +168,8 @@
 </script>
 
 <script>
-    function remove(id) {
+    function remove(id) 
+    {
         Swal.fire({
             title: 'Hapus Dokumen Ini ?',
             text: "Apakah anda akan menghapus dokumen ini",
@@ -212,7 +217,8 @@
         })
     }
 
-    function sendFile(id) {
+    function sendFile(id) 
+    {
         $.ajax({
             url: '<?php echo site_url('dokumen/ajax_get_doc_by_id'); ?>',
             type: 'GET',
