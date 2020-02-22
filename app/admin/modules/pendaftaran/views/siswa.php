@@ -19,12 +19,16 @@
                 <div class="main-card mb-3 card">
                     <div class="card-body">
                         <h5 class="card-title">Siswa</h5>
-                        <table class="mb-0 table table-striped" id="table_dokumen" style="width:100%">
+
+                        <button data-toggle="modal" data-target="#modal_verifikasi" id="show-modal-verif-trigger" style="display:none;">Show modal</button>
+
+                        <table class="mb-0 table table-striped" id="table_pendaftaran" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
                                     <th>Nama Siswa</th>
                                     <th>NISN</th>
+                                    <th>STATUS PENDAFTARAN</th>
                                     <th style="text-align: center">Aksi</th>
                                 </tr>
                             </thead>

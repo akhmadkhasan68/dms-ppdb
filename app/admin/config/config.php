@@ -476,7 +476,8 @@ $config['csrf_exclude_uris'] = array(
   'dokumen/ajax_list_dokumen',
   'approval/ajax_list_approval',
   'share/ajax_list_sharing',
-  'pengguna/ajax_list_user'
+  'pengguna/ajax_list_user',
+  'pendaftaran/ajax_list_pendaftaran'
 );
 
 /*

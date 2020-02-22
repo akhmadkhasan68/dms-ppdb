@@ -501,7 +501,6 @@ class Dokumen extends MY_Controller
 				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')"><i class="fa fa-paper-plane"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')"><i class="fa fa-trash"></i></button></label>
 				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-success" onclick="download()"><i class="fa fa-print"></i></button></label>
 			';
 			$data[] = $row;
 		}

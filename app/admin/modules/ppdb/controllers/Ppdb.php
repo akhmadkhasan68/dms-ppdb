@@ -106,7 +106,8 @@ class Ppdb extends MY_Controller
 				'pekerjaan_wali' => post('pekerjaan_wali'),
 				'alamat_wali' => post('alamat_wali'),
 				'hp_wali' => post('hp_wali'),
-				'agama_wali' => post('agama_wali')
+				'agama_wali' => post('agama_wali'),
+				'created_at' => date('Y-m-d H:i:s')
 			);
 			$add = $this->M_ppdb->insert_table("student", $data);
 			if ($add == FALSE) {
