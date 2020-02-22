@@ -122,6 +122,22 @@
         })
     }
 
+    function downloadApproval(id) {
+        Swal.fire({
+            title: 'Unduh Bukti Persetujuan Ini !',
+            text: "Apakah anda ingin mengunduh bukti persetujuan dokumen ini",
+            type: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#f5365c',
+            confirmButtonText: 'Ya, Unduh bukti Ini'
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "<?php echo base_url(); ?>dokumen/cetak_bukti_approval/"+id;
+            }
+        })
+    }
+
     function showApproval(id) {
         $.ajax({
             url: '<?php echo site_url('dokumen/ajax_get_approval') ?>',

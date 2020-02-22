@@ -496,12 +496,23 @@ class Dokumen extends MY_Controller
 				$row[] = '<div class="badge badge-info">Tidak Membutuhkan Approval</div>';
 			}
 
-			$row[] = '
-				<label><button class="mb-2 mr-2 btn btn-primary" onclick="editFile('.$key->id.')"><i class="fa fa-pen"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')"><i class="fa fa-paper-plane"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')"><i class="fa fa-trash"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
-			';
+			if ($key->is_approval == 1) {
+				$row[] = '
+					<label><button class="mb-2 mr-2 btn btn-primary" onclick="editFile('.$key->id.')"><i class="fa fa-pen"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')"><i class="fa fa-paper-plane"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')"><i class="fa fa-trash"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-success" onclick="downloadApproval('.$key->id.')"><i class="fa fa-print"></i> Cetak Persetujuan</button></label>
+				';
+			} else {
+				$row[] = '
+					<label><button class="mb-2 mr-2 btn btn-primary" onclick="editFile('.$key->id.')"><i class="fa fa-pen"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')"><i class="fa fa-paper-plane"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')"><i class="fa fa-trash"></i></button></label>
+					<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download('.$key->id.')"><i class="fa fa-download"></i></button></label>
+				';
+			}
+			
 			$data[] = $row;
 		}
 
@@ -597,5 +608,50 @@ class Dokumen extends MY_Controller
 		echo $file_dir = './uploads/document/'.$id_admin.'/'.$file;
 
 		force_download($file_dir, NULL);
+	}
+
+	public function cetak_bukti_approval()
+	{	
+		$this->load->view('cetak_bukti/cetak_bukti');
+	}
+
+	public function ajax_get_approval_data()
+	{
+		$id_document = $this->input->get('id');
+
+		$table = 'document_approval a';
+		$columns = "uu.name as sender,a.status, a.updated_at, d.name, d.file, u.name as admin, u.username, l.name as level";
+		$joins = [
+			[
+				'table' => 'document d',
+				'condition' => 'd.id = a.id_document',
+				'left'
+			],
+			[
+				'table' => 'admin u',
+				'condition' => 'u.id = a.id_admin',
+				'left'
+			],
+			[
+				'table' => 'level l',
+				'condition' => 'l.id_level = u.id_level',
+				'left'
+			],
+			[
+				'table' => 'admin uu',
+				'condition' => 'uu.id = d.id_admin',
+				'left'
+			],
+		];
+		$where = "a.id_document = $id_document";
+
+		$data = $this->M_dokumen->fetch_joins($table, $columns, $joins,$where);
+
+		$json_data = [
+			'result' => TRUE,
+			'data' => $data
+		];
+
+		print json_encode($json_data);
 	}
 }
