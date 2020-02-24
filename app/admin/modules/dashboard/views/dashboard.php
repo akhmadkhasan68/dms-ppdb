@@ -23,7 +23,7 @@
                             <div class="widget-subheading">Jumlah Dokumen yang perlu di Approval</div>
                         </div>
                         <div class="widget-content-right">
-                            <div class="widget-numbers text-white"><span>15</span></div>
+                            <div class="widget-numbers text-white"><span><?php echo $notif_approve_doc;?></span></div>
                         </div>
                     </div>
                 </div>
