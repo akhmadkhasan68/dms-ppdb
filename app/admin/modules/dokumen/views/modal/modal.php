@@ -144,18 +144,20 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Detail Approval <span id="judul-file"></span></h5>
+                <h5 class="modal-title">Detail Approval</h5>                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="modal-approval-detail">
+                Nama Dokumen : <span id="judul-dokumen"></span> <br/>
+                File : <span id="judul-file"></span> <br/><br/>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>No</th>
                             <th>Nama</th>
-                            <th>Persetujuan Ke</th>
+                            <th>Level</th>
                             <th>Status</th>
                         </tr>
                     </thead>

@@ -1,3 +1,8 @@
+<style>
+    .a-card:hover {
+        text-decoration:none;
+    }
+</style>
 <div class="app-main__outer">
     <div class="app-main__inner">
         <div class="app-page-title">
@@ -16,6 +21,7 @@
         </div>
         <div class="row">
             <div class="col-md-6 col-xl-4">
+                <a href="./approval" class="a-card">
                 <div class="card mb-3 widget-content bg-danger">
                     <div class="widget-content-wrapper text-white">
                         <div class="widget-content-left">
@@ -27,6 +33,7 @@
                         </div>
                     </div>
                 </div>
+                <a/>
             </div>
         </div>
     </div>

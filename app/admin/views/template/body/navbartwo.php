@@ -1,9 +1,9 @@
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar">
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header closed-sidebar">
         <div class="app-header header-shadow">
-            <div class="app-header__logo">
+            <div class="app-header__logo" style="width:250px">
                 <div class="" style="margin-top: 6px">
-                    <h5>PPDB</h5>
+                    <h6>Penerimaan Siswa Baru</h6>
                 </div>
             </div>
             <div class="app-header__mobile-menu">
@@ -53,11 +53,11 @@
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        SMP NEGERI 1 ALAS BARAT
+                                        <?php echo $config->name; ?>
                                     </div>
-                                    <div class="widget-subheading">
+                                    <!-- <div class="widget-subheading">
                                         PPDB
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

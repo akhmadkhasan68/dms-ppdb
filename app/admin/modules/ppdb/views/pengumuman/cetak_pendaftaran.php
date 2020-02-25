@@ -113,15 +113,18 @@
                     $('#txt_nisn').html(response.data[0].nisn);
                     $('#nama').html(response.data[0].nama_siswa);
                     $('#nama_sekolah').html(response.data[0].nama_sekolah);
-                    $('#status_pendaftaran').html(response.data[0].status_pendaftaran)
                     var status = response.data[0].status_pendaftaran;
+                    var status_pendaftaran = status;            
                     if (status == "BELUM") {
-                        $('#div_status_pendaftaran').css("color", "blue");
+                        $('#div_status_pendaftaran').addClass("alert alert-info");
+                        status_pendaftaran = "BELUM DIVERIFIKASI";
                     } else if (status == "DITERIMA") {
-                        $('#div_status_pendaftaran').css("color", "green");
+                        $('#div_status_pendaftaran').addClass("alert alert-success");
                     } else {
-                        $('#div_status_pendaftaran').css("color", "red");
+                        $('#div_status_pendaftaran').addClass("alert alert-danger");
                     }
+
+                    $('#status_pendaftaran').html(status_pendaftaran);
                     window.print();
                 } else {
                     message("Mohon Maaf", "Nisn tidak di temukan", "error", "info", 1000);

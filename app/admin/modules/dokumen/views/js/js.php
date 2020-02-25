@@ -158,8 +158,8 @@
                     html += `
                         <tr>
                             <td>`+ no++ +`</td>
-                            <td>`+ response.data[i].name +`</td>
-                            <td>`+ response.data[i].admin +` (`+ response.data[i].level +`)</td>
+                            <td>`+ response.data[i].admin + `</td>
+                            <td>`+ response.data[i].level + `</td>
                             <td>`;
                             if(response.data[i].status == "BELUM"){
                                 html += `<div class='badge badge-warning'>Menunggu Approval</div>`;
@@ -169,10 +169,12 @@
                                 html += `<div class='badge badge-danger'>Approval Ditolak</div>`;
                             }
                     html +=`</td></tr>`;
-                    title += response.data[i].file;
+                    title = response.data[i].name;
+                    name = response.data[i].file;
                 }
                 console.log(response);
                 $("#table-body-approval").html(html);
+                $("#judul-dokumen").html(name);
                 $("#judul-file").html(title);
                 $("#show-modal-approval").trigger('click');
             },

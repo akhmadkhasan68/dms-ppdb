@@ -11,7 +11,7 @@
                                 <img src="<?php echo base_url(); ?>uploads/config/<?php echo $config->logo; ?>" style="max-height: 230px;margin-top:40px">
                                 <div style="margin-top: 5px"></div>
                                 <h3>Selamat Datang</h3>
-                                <h3>Panitia Penerimaan Peserta Didik Baru</h3>
+                                <h3>Calon Peserta Didik Baru</h3>
                                 <h3><b><?php echo $config->name; ?></b></h3>
                                 <br>
                                 <div>

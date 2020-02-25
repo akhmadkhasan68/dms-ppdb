@@ -75,7 +75,7 @@ class Dokumen extends MY_Controller
 		//SET CONFIG UPLOAD 
 		$config = [
 			'upload_path' => $upload_path, //upload path to save the document
-			'allowed_types' => "*",
+			'allowed_types' => "gif|jpg|jpeg|png|doc|docx|xlsx|csv|xls",
 			'file_name' =>  $file_name,
 			'max_size' => '5000'
 		];
@@ -281,7 +281,7 @@ class Dokumen extends MY_Controller
 			//SET CONFIG UPLOAD 
 			$config = [
 				'upload_path' => $upload_path, //upload path to save the document
-				'allowed_types' => "*",
+				'allowed_types' => "gif|jpg|jpeg|png|doc|docx|xlsx|csv|xls",
 				'file_name' =>  $file_name,
 				'max_size' => '5000'
 			];

@@ -75,6 +75,10 @@
                                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Ayah</label>
                                                 <select class="form-control" id="agama_ayah" name="agama_ayah">
                                                     <option value="Islam" selected>Islam</option>
+                                                    <option value="Kristen Katolik">Kristen Katolik</option>
+                                                    <option value="Kristen Protestan">Kristen Protestan</option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Budha">Budha</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -128,9 +132,13 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-md-12">
-                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Ayah</label>
+                                            <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Ibu</label>
                                                 <select class="form-control" id="agama_ibu" name="agama_ibu">
                                                     <option value="Islam" selected>Islam</option>
+                                                    <option value="Kristen Katolik">Kristen Katolik</option>
+                                                    <option value="Kristen Protestan">Kristen Protestan</option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Budha">Budha</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -197,6 +205,10 @@
                                             <div class="position-relative form-group"><label for="exampleEmail11" class="">Agama Wali</label>
                                                 <select class="form-control" id="agama_wali" name="agama_wali">
                                                     <option value="Islam" selected>Islam</option>
+                                                    <option value="Kristen Katolik">Kristen Katolik</option>
+                                                    <option value="Kristen Protestan">Kristen Protestan</option>
+                                                    <option value="Hindu">Hindu</option>
+                                                    <option value="Budha">Budha</option>
                                                 </select>
                                             </div>
                                         </div>
