@@ -8,8 +8,12 @@
                     <div class="card-body" style="padding: 50px">
                         <div class="row">
                             <div class="col-sm-12" style="text-align: center">
+                                <?php if ($this->input->get('t') == "1") {
+                                    echo "<h3>Selamat Pendafataran Anda Berhasil</h3>";
+                                } ?>
                                 <img src="<?php echo base_url(); ?>uploads/config/<?php echo $config->logo; ?>" style="max-height: 230px;margin-top:40px">
                                 <div style="margin-top: 5px"></div>
+
                                 <h3>Selamat Datang</h3>
                                 <h3>Panitia Penerimaan Peserta Didik Baru</h3>
                                 <h3><b><?php echo $config->name; ?></b></h3>

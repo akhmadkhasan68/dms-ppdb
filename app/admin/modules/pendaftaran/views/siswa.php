@@ -34,9 +34,9 @@
                                     <td>Adi</td>
                                     <td>1231232112</td>
                                     <td style="text-align: center">
-                                        <label><button class="mb-2 mr-2 btn btn-primary" onclick="open_detail()">Detail</button></label>
-                                        <label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#modal_verifikasi">Verifikasi</button></label>
-                                        <label><button class="mb-2 mr-2 btn btn-danger" onclick="remove()">Hapus</button></label>
+                                        <label><button class="mb-2 mr-2 btn btn-primary" onclick="open_detail()" title="Detail Siswa">Detail</button></label>
+                                        <label><button class="mb-2 mr-2 btn btn-info" data-toggle="modal" data-target="#modal_verifikasi" title="Verifikasi Sswa">Verifikasi</button></label>
+                                        <label><button class="mb-2 mr-2 btn btn-danger" onclick="remove()" title="Hapus Siswa">Hapus</button></label>
                                     </td>
                                 </tr>
                             </tbody>

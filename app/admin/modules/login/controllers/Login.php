@@ -10,27 +10,26 @@ class Login extends MY_Controller
 		$this->load->helper('common');
 		$this->load->library(array('form_validation', 'session'));
 
-		if($this->session->userdata('logged_in') == TRUE)
-		{
+		if ($this->session->userdata('logged_in') == TRUE) {
 			redirect('dashboard');
 		}
 	}
 
 	public function index()
-	{	
+	{
 		$data = config_table();
 		$this->load->view('login', $data);
 	}
 	public function ajax_get_level()
 	{
-		$data = $this->M_login->fetch_table("*","level");
+		$data = $this->M_login->fetch_table("*", "level");
 
-		if(count($data) > 0){
+		if (count($data) > 0) {
 			$json_data = [
 				'result' => TRUE,
 				'data' => $data
 			];
-		}else{
+		} else {
 			$json_data = [
 				'result' => FALSE,
 				'data' => ["head" => 'Kosong!', "body" => 'Maaf, data level kosong!']
@@ -44,15 +43,14 @@ class Login extends MY_Controller
 	{
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
-		$login_as = $this->input->post('login_as');
+		$login_as = 1;
 
 		//SET RULES VALIDATION 
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('password', 'password', 'required');
-		$this->form_validation->set_rules('login_as', 'login_as', 'required');
+		// $this->form_validation->set_rules('login_as', 'login_as', 'required');
 
-		if($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			$form_error = $this->form_validation->error_array();
 
 			$json_data = [
@@ -68,11 +66,10 @@ class Login extends MY_Controller
 		}
 
 		//SELECT USER
-		$select_data = $this->M_login->fetch_table("*","admin","username = '$username' AND password = '$password' AND id_level = '$login_as'",$order ="",$by="",$start = 0,$limit = 1);
+		$select_data = $this->M_login->fetch_table("*", "admin", "username = '$username' AND password = '$password' AND id_level = '$login_as'", $order = "", $by = "", $start = 0, $limit = 1);
 
 		//IF USER IS NOT AVAILABLE
-		if(count($select_data) < 1)
-		{
+		if (count($select_data) < 1) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => '',
@@ -81,11 +78,10 @@ class Login extends MY_Controller
 			];
 			print json_encode($json_data);
 			die();
-		}	
-		
+		}
+
 		//FETCH DATA
-		foreach($select_data as $row)
-		{
+		foreach ($select_data as $row) {
 			$id = $row->id;
 			$id_level = $row->id_level;
 			$email = $row->email;
@@ -95,38 +91,24 @@ class Login extends MY_Controller
 		}
 
 		//SET LEVEL
-		if($id_level == "1")
-		{
+		if ($id_level == "1") {
 			$level = "Super Admin";
-		}
-		elseif($id_level == "2")
-		{
+		} elseif ($id_level == "2") {
 			$level = "Kepala Sekolah";
-		}
-		elseif($id_level == "3")
-		{
+		} elseif ($id_level == "3") {
 			$level = "Ketua";
-		}
-		elseif($id_level == "4")
-		{
+		} elseif ($id_level == "4") {
 			$level = "Wakil Ketua";
-		}
-		elseif($id_level == "5")
-		{
+		} elseif ($id_level == "5") {
 			$level = "Bendahara";
-		}
-		elseif($id_level == "6")
-		{
+		} elseif ($id_level == "6") {
 			$level = "Sekertaris";
-		}
-		elseif($id_level == "7")
-		{
+		} elseif ($id_level == "7") {
 			$level = "Anggota";
 		}
 
 		//THE CONDITION IF USER NON ACTIVE
-		if($is_active == 0)
-		{
+		if ($is_active == 0) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => '',
@@ -157,8 +139,8 @@ class Login extends MY_Controller
 		$json_data = [
 			'result' => true,
 			'form_error' => '',
-			'message' => ['head' => 'Berhasil', 'body' => 'Selamat datang '.$name],
-			'redirect' => $this->config->item('index_page').'dashboard'
+			'message' => ['head' => 'Berhasil', 'body' => 'Selamat datang ' . $name],
+			'redirect' => $this->config->item('index_page') . 'dashboard'
 		];
 		print json_encode($json_data);
 	}

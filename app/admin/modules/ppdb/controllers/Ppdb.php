@@ -77,6 +77,17 @@ class Ppdb extends MY_Controller
 			print json_encode($json_data);
 			die();
 		} else {
+			$count = count($this->M_ppdb->fetch_joins("student", "*", "", "nisn = " . post("nisn"),  FALSE));
+			if ($count >= 1) {
+				$json_data =  array(
+					"result" => FALSE,
+					"message" => array('head' => 'Failed', 'body' => 'Mohon maaf nisn telah tedaftar'),
+					"form_error" => $error,
+					"redirect" => ''
+				);
+				print json_encode($json_data);
+				die();
+			}
 			$desired_length = 5;
 			$unique = uniqid();
 			$random = substr($unique, 0, $desired_length);
@@ -123,7 +134,7 @@ class Ppdb extends MY_Controller
 					"result" => TRUE,
 					"message" => array('head' => 'Success', 'body' => 'Selamat pendaftaran anda berhasil'),
 					"form_error" => '',
-					"redirect" => '' . base_url() . $this->config->item('index_page') . 'ppdb'
+					"redirect" => '' . base_url() . $this->config->item('index_page') . 'ppdb?t=1'
 				);
 				print json_encode($json_data);
 			}

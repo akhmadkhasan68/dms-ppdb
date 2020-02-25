@@ -10,8 +10,7 @@ class Pengguna extends MY_Controller
 		$this->load->helper('common');
 		$this->load->library('form_validation');
 
-		if($this->session->userdata('logged_in') == FALSE)
-		{
+		if ($this->session->userdata('logged_in') == FALSE) {
 			redirect('login');
 		}
 	}
@@ -25,7 +24,7 @@ class Pengguna extends MY_Controller
 		$data['notif_approve_doc'] = count_notif_approve_doc();
 		$data['notif_share_doc'] = count_notif_share_doc();
 		$data['get_level'] = get_level();
-		
+
 		$this->load->view('template', $data);
 	}
 
@@ -35,7 +34,7 @@ class Pengguna extends MY_Controller
 		$column_order = array('a.id', 'a.name');
 		$column_search = array('a.id', 'a.name');
 		$order = array('a.id' => 'DESC');
-		$where = "a.id != ".$this->session->userdata('id');
+		$where = "a.id != " . $this->session->userdata('id');
 		$group = "";
 		$table = "admin a";
 		$joins = [
@@ -49,7 +48,7 @@ class Pengguna extends MY_Controller
 		$list = $this->M_pengguna->get_datatables($column, $table, $column_order, $column_search, $order, $where, $joins, $group);
 
 		$data = array();
-		$no = $_POST['start']+1;
+		$no = $_POST['start'] + 1;
 
 		foreach ($list as $key) {
 			$row = array();
@@ -58,29 +57,28 @@ class Pengguna extends MY_Controller
 			$row[] = $key->username;
 			$row[] = $key->level;
 
-			if($key->is_active == 1)
-			{
+			if ($key->is_active == 1) {
 				$row[] = "<div class='badge badge-success'>User Aktif</div>";
-			}else{
+			} else {
 				$row[] = "<div class='badge badge-danger'>User Nonaktif</div>";
-			}	
+			}
 
-			if($key->is_active != 1){
+			if ($key->is_active != 1) {
 				$action = '
-					<label><button class="mb-2 mr-2 btn btn-success" onclick="activeUser('.$key->id.', 1)">Aktifkan User</button></label>
-					<label><button class="mb-2 mr-2 btn btn-info" onclick="editUser('.$key->id.')">Edit</button></label>
-					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')">Hapus</button></label>
+					<label><button class="mb-2 mr-2 btn btn-success" onclick="activeUser(' . $key->id . ', 1)" title="Status Pengguna">Aktifkan User</button></label>
+					<label><button class="mb-2 mr-2 btn btn-info" onclick="editUser(' . $key->id . ')" title="Edit Pengguna">Edit</button></label>
+					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove(' . $key->id . ')" title="Hapus Pengguna">Hapus</button></label>
 				';
-			}else{
+			} else {
 				$action = '
-					<label><button class="mb-2 mr-2 btn btn-warning" onclick="activeUser('.$key->id.', 0)">Nonaktifkan User</button></label>
-					<label><button class="mb-2 mr-2 btn btn-info" onclick="editUser('.$key->id.')">Edit</button></label>
-					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove('.$key->id.')">Hapus</button></label>
+					<label><button class="mb-2 mr-2 btn btn-warning" onclick="activeUser(' . $key->id . ', 0)" title="Status Pengguna">Nonaktifkan User</button></label>
+					<label><button class="mb-2 mr-2 btn btn-info" onclick="editUser(' . $key->id . ')" title="Edit Pengguna">Edit</button></label>
+					<label><button class="mb-2 mr-2 btn btn-danger" onclick="remove(' . $key->id . ')" title="Hapus Pengguna">Hapus</button></label>
 				';
 			}
 
 			$row[] = $action;
-			
+
 
 			$data[] = $row;
 		}
@@ -98,7 +96,7 @@ class Pengguna extends MY_Controller
 	{
 		$id = $this->input->get('id');
 
-		$data = $this->M_pengguna->get_row("*","admin","id = $id");
+		$data = $this->M_pengguna->get_row("*", "admin", "id = $id");
 
 		$json_data = [
 			'result' => TRUE,
@@ -116,8 +114,7 @@ class Pengguna extends MY_Controller
 		$this->form_validation->set_rules('password', 'password', 'required');
 		$this->form_validation->set_rules('id_level', 'id_level', 'required');
 
-		if($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			$error = $this->form_validation->error_array();
 			$json_data = [
 				'result' => FALSE,
@@ -136,10 +133,9 @@ class Pengguna extends MY_Controller
 		$id_level = $this->input->post('id_level');
 
 		//CHECK USER
-		$select_user = $this->M_pengguna->get_row("*","admin","name = '$name' OR username = '$username'");
+		$select_user = $this->M_pengguna->get_row("*", "admin", "name = '$name' OR username = '$username'");
 
-		if(count($select_user) > 0)
-		{
+		if (count($select_user) > 0) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => "",
@@ -160,7 +156,7 @@ class Pengguna extends MY_Controller
 
 		$insert_data = $this->M_pengguna->insert_table("admin", $data);
 
-		if($insert_data == FALSE){
+		if ($insert_data == FALSE) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => "",
@@ -176,7 +172,7 @@ class Pengguna extends MY_Controller
 			'result' => TRUE,
 			'form_error' => "",
 			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil menambahkan data user!'],
-			'redirect' => $this->config->item('index_page').'pengguna'
+			'redirect' => $this->config->item('index_page') . 'pengguna'
 		];
 
 		print json_encode($json_data);
@@ -195,8 +191,7 @@ class Pengguna extends MY_Controller
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('id_level', 'id_level', 'required');
 
-		if($this->form_validation->run() == FALSE)
-		{
+		if ($this->form_validation->run() == FALSE) {
 			$error = $this->form_validation->error_array();
 
 			$json_data = [
@@ -211,10 +206,9 @@ class Pengguna extends MY_Controller
 		}
 
 		//CHECK USER
-		$select_user = $this->M_pengguna->get_row("*","admin","(name = '$name' OR username = '$username') AND id != $id");
+		$select_user = $this->M_pengguna->get_row("*", "admin", "(name = '$name' OR username = '$username') AND id != $id");
 
-		if(count($select_user) > 0)
-		{
+		if (count($select_user) > 0) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => "",
@@ -227,14 +221,13 @@ class Pengguna extends MY_Controller
 		}
 
 		//SET DATA IF PASSWORD IS NULL
-		if($password == "")
-		{
+		if ($password == "") {
 			$data = [
 				'name' => $name,
 				'username' => $username,
 				'id_level' => $level
 			];
-		}else{
+		} else {
 			$data = [
 				'name' => $name,
 				'username' => $username,
@@ -244,14 +237,14 @@ class Pengguna extends MY_Controller
 		}
 
 		//UPDATE USER
-		$update_user = $this->M_pengguna->update_table("admin",$data,"id",$id);
+		$update_user = $this->M_pengguna->update_table("admin", $data, "id", $id);
 
 		//IF UPDATE SUCCESS
 		$json_data = [
 			'result' => TRUE,
 			'form_error' => "",
 			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil merubah data user!'],
-			'redirect' => $this->config->item('index_page').'pengguna'
+			'redirect' => $this->config->item('index_page') . 'pengguna'
 		];
 
 		print json_encode($json_data);
@@ -262,14 +255,13 @@ class Pengguna extends MY_Controller
 		$id = $this->input->post('id');
 		$is_active = $this->input->post('is_active');
 
-		$get_row = $this->M_pengguna->get_row("*","admin","id = $id");
+		$get_row = $this->M_pengguna->get_row("*", "admin", "id = $id");
 
-		if(count($get_row) < 0)
-		{
+		if (count($get_row) < 0) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => "",
-				'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, user dengan id '.$id.' tidak ditemukan!'],
+				'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, user dengan id ' . $id . ' tidak ditemukan!'],
 				'redirect' => ''
 			];
 
@@ -281,10 +273,9 @@ class Pengguna extends MY_Controller
 			'is_active' => $is_active
 		];
 
-		$update_user = $this->M_pengguna->update_table2("admin",$data,"id = $id");
+		$update_user = $this->M_pengguna->update_table2("admin", $data, "id = $id");
 
-		if($update_user == FALSE)
-		{
+		if ($update_user == FALSE) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => "",
@@ -300,7 +291,7 @@ class Pengguna extends MY_Controller
 			'result' => TRUE,
 			'form_error' => "",
 			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil mengubah status user!'],
-			'redirect' => $this->config->item('index_page').'pengguna'
+			'redirect' => $this->config->item('index_page') . 'pengguna'
 		];
 
 		print json_encode($json_data);
@@ -310,10 +301,9 @@ class Pengguna extends MY_Controller
 	{
 		$id = $this->input->post('id');
 
-		$delete_data = $this->M_pengguna->delete_table("admin","id",$id);
+		$delete_data = $this->M_pengguna->delete_table("admin", "id", $id);
 
-		if($delete_data == FALSE)
-		{
+		if ($delete_data == FALSE) {
 			$json_data = [
 				'result' => FALSE,
 				'form_error' => "",
@@ -329,7 +319,7 @@ class Pengguna extends MY_Controller
 			'result' => TRUE,
 			'form_error' => "",
 			'message' => ['head' => 'Berhasil', 'body' => 'Selamat, anda berhasil menghapus user!'],
-			'redirect' => $this->config->item('index_page').'pengguna'
+			'redirect' => $this->config->item('index_page') . 'pengguna'
 		];
 
 		print json_encode($json_data);

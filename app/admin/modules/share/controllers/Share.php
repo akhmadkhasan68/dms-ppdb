@@ -9,8 +9,7 @@ class Share extends MY_Controller
 		$this->load->model('M_share');
 		$this->load->helper('common');
 
-		if($this->session->userdata('logged_in') == FALSE)
-		{
+		if ($this->session->userdata('logged_in') == FALSE) {
 			redirect('login');
 		}
 	}
@@ -23,7 +22,7 @@ class Share extends MY_Controller
 		$data['get_admin'] = get_admin();
 		$data['notif_approve_doc'] = count_notif_approve_doc();
 		$data['notif_share_doc'] = count_notif_share_doc();
-		
+
 		$this->load->view('template', $data);
 	}
 
@@ -33,7 +32,7 @@ class Share extends MY_Controller
 		$column_order = array('a.id', 'a.name', 'd.name');
 		$column_search = array('a.id', 'a.name', 'd.name');
 		$order = array('a.id' => 'DESC');
-		$where = "a.id_admin = ".$this->session->userdata('id')." AND is_shared = 1";
+		$where = "a.id_admin = " . $this->session->userdata('id') . " AND is_shared = 1";
 		$group = "";
 		$table = "document a";
 		$joins = [
@@ -52,18 +51,18 @@ class Share extends MY_Controller
 		$list = $this->M_share->get_datatables($column, $table, $column_order, $column_search, $order, $where, $joins, $group);
 
 		$data = array();
-		$no = $_POST['start']+1;
-		
+		$no = $_POST['start'] + 1;
+
 		foreach ($list as $key) {
 			$row = array();
 			$row[] = $no++;
 			$row[] = $key->name;
 			$row[] = $key->file;
-			$row[] = $key->name_admin." (".$key->level.")";
+			$row[] = $key->name_admin . " (" . $key->level . ")";
 
 			$row[] = '
-				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile('.$key->id.')""><i class="fa fa-paper-plane"></i></button></label>
-				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()"><i class="fa fa-download"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-info" onclick="sendFile(' . $key->id . ')"" title="Kirim Dokument"><i class="fa fa-paper-plane"></i></button></label>
+				<label><button class="mb-2 mr-2 btn btn-secondary" onclick="download()" title="Download Dokument"><i class="fa fa-download"></i></button></label>
 			';
 			$data[] = $row;
 		}
