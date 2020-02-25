@@ -38,17 +38,17 @@ class Login extends MY_Controller
 
 		print json_encode($json_data);
 	}
-
+	// sss
 	public function ajax_action_login()
 	{
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
-		$login_as = 1;
+		$login_as = $this->input->post('login_as');
 
 		//SET RULES VALIDATION 
 		$this->form_validation->set_rules('username', 'username', 'required');
 		$this->form_validation->set_rules('password', 'password', 'required');
-		// $this->form_validation->set_rules('login_as', 'login_as', 'required');
+		$this->form_validation->set_rules('login_as', 'login_as', 'required');
 
 		if ($this->form_validation->run() == FALSE) {
 			$form_error = $this->form_validation->error_array();
